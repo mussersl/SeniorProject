@@ -1,0 +1,35 @@
+body {
+    background: #DDDDDD;
+}
+
+.navbar {
+    background-color: #800000;
+    color: white;
+}
+
+.page-container {
+    margin-top: 75px;
+}
+
+#chatlog,
+#questioninput {
+    border: 2px solid black;
+
+}
+
+#chatlog {
+    height: 400px;
+}
+
+#questioninput {
+    color: black;
+}
+
+#ask-button {
+    background-color: #800000;
+    color: white;
+}
+
+#ask-button-position {
+    justify-content: end !important;
+}
