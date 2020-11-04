@@ -18,7 +18,11 @@ body {
 }
 
 #chatlog-window {
+    overflow: scroll;
     height: 400px;
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 15px 15px;
 }
 
 #questioninput {
@@ -28,12 +32,6 @@ body {
 #ask-button {
     background-color: #800000;
     color: white;
-}
-
-#chatlog-window {
-    display: flex;
-    flex-direction: column-reverse;
-    padding: 10px 10px;
 }
 
 .bot-text {
