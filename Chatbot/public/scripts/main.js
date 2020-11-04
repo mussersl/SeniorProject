@@ -23,11 +23,11 @@ class speech {
 rhit.main = function () {
 	console.log("Ready");
 	rhit.chatList.push(new speech("Hello", rhit.id.BOT));
-	rhit.chatList.push(new speech("Hi", rhit.id.USER));
-	rhit.displayChatLog();
+	rhit.displayFullChatLog();
+	$("#ask-button").click(rhit.askButton);
 };
 
-rhit.displayChatLog = function () {
+rhit.displayFullChatLog = function () {
 	rhit.chatList.forEach(dialogue => {
 		if(dialogue.textId == rhit.id.BOT){
 			$("#chatlog").append("<div class=\"bot-text\">"+dialogue.text+"</div>");
@@ -35,6 +35,21 @@ rhit.displayChatLog = function () {
 			$("#chatlog").append("<div class=\"user-text\">"+dialogue.text+"</div>");
 		}
 	});
+}
+
+rhit.displayLast = function () {
+	let last = rhit.chatList[rhit.chatList.length - 1];
+	if(last.textId == rhit.id.BOT){
+		$("#chatlog").append("<div class=\"bot-text\">"+last.text+"</div>");
+	} else {
+		$("#chatlog").append("<div class=\"user-text\">"+last.text+"</div>");
+	}
+}
+
+rhit.askButton = function() {
+	let question = document.getElementById("questioninput").value;
+	rhit.chatList.push(new speech(question, rhit.id.USER));
+	rhit.displayLast();
 }
 
 
