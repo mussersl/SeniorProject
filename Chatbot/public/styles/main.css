@@ -11,13 +11,13 @@ body {
     margin-top: 75px;
 }
 
-#chatlog,
+#chatlog-window,
 #questioninput {
     border: 2px solid black;
 
 }
 
-#chatlog {
+#chatlog-window {
     height: 400px;
 }
 
@@ -30,6 +30,28 @@ body {
     color: white;
 }
 
-#ask-button-position {
-    justify-content: end !important;
+#chatlog-window {
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 10px 10px;
+}
+
+.bot-text {
+    background-color: #800000;
+    color: white;
+
+}
+
+.user-text {
+    background-color: gray;
+    margin-left: auto;
+}
+
+.bot-text,
+.user-text {
+    border-radius: 10px;
+    max-width: 200px;
+    width: max-content;
+    padding: 10px 10px;
+    margin-top: 5px;
 }
