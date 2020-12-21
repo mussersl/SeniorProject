@@ -3,7 +3,7 @@ using Chatbot;
 
 namespace Chatbot
 {
-    public class ResponseGeneratorInterface
+    public interface ResponseGeneratorInterface
     {
         List<String> generateResponse(List<Answer> answers);
     }
