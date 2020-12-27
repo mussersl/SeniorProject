@@ -7,7 +7,7 @@ namespace Chatbot
     {
         
 		public List<String> parseQuestion(string Question){
-			return List<String> toReturn = new ArrayList<String(Arrays.asList(Question.split(" ")));
+			return List<String> toReturn = new ArrayList<String>(Arrays.asList(Question.split(" ")));
 		}
 		
     }
