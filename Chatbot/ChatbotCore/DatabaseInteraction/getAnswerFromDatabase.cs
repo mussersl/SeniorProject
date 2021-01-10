@@ -4,9 +4,8 @@ using Chatbot;
 namespace Chatbot{
     public class getAnswerFromDatabase{
         
-        
+        /*
         public void ConnectToAccess(){
-            MySql.Data.MySqlClient.MySqlConnection conn;
 
             System.Data.MariaDb.MariaDbConnection wire = new 
                 System.Data.MariaDb.MariaDbConnection();
@@ -27,6 +26,6 @@ namespace Chatbot{
             {
                 conn.Close();
             }
-        }
+        } */
     }
 }
