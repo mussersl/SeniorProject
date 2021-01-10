@@ -1,10 +1,11 @@
 ﻿using System;
 using Chatbot;
+using System.Collections.Generic;
 
 namespace Chatbot
 {
-    public class KeywordRelevencyUpdaterInterface
+    public interface KeywordRelevencyUpdaterInterface
     {
-        bool updateKeywords(Answer, List<String> keywords);
+        bool updateKeywords(Answer ans, List<string> keywords);
     }
 }

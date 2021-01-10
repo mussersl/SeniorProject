@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\ChatbotCore",
+    "\\ChatbotCore\\Core",
+    "\\ChatbotCore\\DatabaseInteraction",
+    "\\ChatbotCore\\Test"
+  ],
+  "SelectedNode": "\\ChatbotCore\\Test\\Class1.cs",
+  "PreviewInSolutionExplorer": false
+}

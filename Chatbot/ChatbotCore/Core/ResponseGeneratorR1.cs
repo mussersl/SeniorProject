@@ -1,14 +1,15 @@
 using System;
 using Chatbot;
+using System.Collections.Generic;
 
 namespace Chatbot
 {
     public class ResponseGeneratorR1 : ResponseGeneratorInterface
     {
-        List<String> generateResponse(List<Answer> answers){
-            var hold = new List<String>();
-            int hold2 = -1;
-            int hold3 = -1;
+        public List<string> generateResponse(List<Answer> answers){
+            var hold = new List<string>();
+            double hold2 = -1;
+            double hold3 = -1;
             int count = 0;
             foreach (Answer keep in answers){
                 if(keep.relevency > hold3){
@@ -17,11 +18,11 @@ namespace Chatbot
                     count += 1;
                 }
             }
-            if(hold3 = -1){
+            if(hold3 == -1){
                 hold.Add("No valid response detected");
                 return hold;
             }
-            hold.Add(answers[hold3].Answer);
+            hold.Add(answers[(int)hold3].answer);
             return hold;
         }
     }

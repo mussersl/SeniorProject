@@ -1,5 +1,6 @@
 ﻿using System;
 using Chatbot;
+using System.Collections.Generic;
 
 namespace Chatbot
 {
@@ -11,10 +12,10 @@ namespace Chatbot
             dq = dqi;
         }
 
-        public bool addQuestionToAnswer(String question, Answer ans, Dictionary<String, List<String>> keywords);
+        public abstract bool addQuestionToAnswer(string question, Answer ans, Dictionary<string, List<string>> keywords);
 
         //These may be the same
-        public bool addAnswer(Answer ans);
-        public bool editAnswer(Answer ans);
+        public abstract bool addAnswer(Answer ans);
+        public abstract bool editAnswer(Answer ans);
     }
 }

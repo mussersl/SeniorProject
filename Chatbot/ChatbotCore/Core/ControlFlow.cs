@@ -1,11 +1,12 @@
 ﻿using System;
 using Chatbot;
+using System.Collections.Generic;
 
 namespace Chatbot
 {
     public class ControlFlow
     {
-        private Dictionary<String, double> recentKeywords;
+        private Dictionary<string, double> recentKeywords;
         private KeywordParserInterface wordParser;
 
         //Constructor
@@ -14,15 +15,15 @@ namespace Chatbot
             this.wordParser = new AllWordsParser();
         }
 
-        public String askQuestion(String question)
+        public string askQuestion(string question)
         {
-            List<String> questionKeywords = wordParser.parseQuestion(question);
+            List<string> questionKeywords = wordParser.parseQuestion(question);
             return null;
         }
 
-        public bool addAnswer(List<String> questions, String answer)
+        public bool addAnswer(List<string> questions, string answer)
         {
-            return null;
+            return false;
         }
     }
 }

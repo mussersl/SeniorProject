@@ -1,18 +1,19 @@
 using System;
 using System.Diagnostics;
 using Chatbot;
+using System.Collections.Generic;
 
 namespace Chatbot
 {
     public class RelevancyAnalyzer : RelevancyAnalyzerInterface 
     {
-        Answer assignRelevencyOf(Answer ans, List<String> keywords, List<String> recentKeywords) 
+        public Answer assignRelevencyOf(Answer ans, List<string> keywords, List<string> recentKeywords) 
         {
             return null;
         }
-        void sortAnswers(List<Answer> answers)
+        public void sortAnswers(List<Answer> answers)
         {
-            answers.sort((answer a,answer b) => {return a.relevency.CompareTo(b.relevency);});
+            answers.Sort((Answer a,Answer b) => {return a.relevency.CompareTo(b.relevency);});
         }
     }
 }

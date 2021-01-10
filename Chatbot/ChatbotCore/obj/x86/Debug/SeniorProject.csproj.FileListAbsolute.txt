@@ -1,0 +1,2 @@
+C:\Users\Administrator\Documents\GitHub\SeniorProject\Chatbot\ChatbotCore\obj\x86\Debug\SeniorProject.csprojAssemblyReference.cache
+C:\Users\Administrator\Documents\GitHub\SeniorProject\Chatbot\ChatbotCore\obj\x86\Debug\SeniorProject.csproj.CoreCompileInputs.cache

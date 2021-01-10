@@ -1,13 +1,14 @@
 using System;
 using Chatbot;
+using System.Collections.Generic;
 
 namespace Chatbot
 {
     public class AllWordsParser : KeywordParserInterface
     {
         
-		public List<String> parseQuestion(string Question){
-			return List<String> toReturn = new ArrayList<String>(Arrays.asList(Question.split(" ")));
+		public List<string> parseQuestion(string question){
+			return new List<String>(question.Split(' '));
 		}
 		
     }

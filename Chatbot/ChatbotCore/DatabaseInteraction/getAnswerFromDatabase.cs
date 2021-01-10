@@ -1,11 +1,13 @@
-using System
-using Chatbot
+using System;
+using Chatbot;
 
-namspace Chatbot{
+namespace Chatbot{
     public class getAnswerFromDatabase{
         
         
         public void ConnectToAccess(){
+            MySql.Data.MySqlClient.MySqlConnection conn;
+
             System.Data.MariaDb.MariaDbConnection wire = new 
                 System.Data.MariaDb.MariaDbConnection();
             //connectionString need to be changed

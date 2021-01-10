@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskName": "task-Class1",
+      "appliesTo": "ChatbotCore/Test/Class1.cs",
+      "type": "launch"
+    }
+  ]
+}

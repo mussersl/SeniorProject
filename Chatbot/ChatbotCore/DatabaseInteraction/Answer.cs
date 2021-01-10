@@ -1,15 +1,16 @@
 ﻿using System;
 using Chatbot;
+using System.Collections.Generic;
 
 namespace Chatbot
 {
     public class Answer
     {
         //retrieved from database
-        public String ID { get; set; }
-        public String question { get; set; }
-        public String answer { get; set; }
-        public Dictionary<String, double> keywords { get; set; }  //Keyword, relevency to question
+        public string ID { get; set; }
+        public string question { get; set; }
+        public string answer { get; set; }
+        public Dictionary<string, double> keywords { get; set; }  //Keyword, relevency to question
 
         //Assigned by relevencyAnlyzer
         public double relevency { get; set; }
