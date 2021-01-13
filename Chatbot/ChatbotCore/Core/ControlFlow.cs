@@ -18,7 +18,7 @@ namespace Chatbot
         public string askQuestion(string question)
         {
             List<string> questionKeywords = wordParser.parseQuestion(question);
-            return null;
+            return  "Keywords parsed : " + questionKeywords.Count;
         }
 
         public bool addAnswer(List<string> questions, string answer)
