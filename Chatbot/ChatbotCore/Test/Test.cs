@@ -19,6 +19,7 @@ namespace Chatbot
                 //Console.WriteLine("Now running test on predetermined Question.");
                 if (question.Equals("What does IRPA stand for?"))
                 {
+                    //Currently cannot connect to database on test computer.
                     Answer ans = new Answer();
                     ans.ID = "0001";
                     ans.question = "What does IRPA stand for?";
