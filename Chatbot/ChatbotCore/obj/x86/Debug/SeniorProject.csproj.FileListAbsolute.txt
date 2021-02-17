@@ -1,6 +1,0 @@
-C:\Users\Administrator\Documents\GitHub\SeniorProject\Chatbot\ChatbotCore\obj\x86\Debug\SeniorProject.csprojAssemblyReference.cache
-C:\Users\Administrator\Documents\GitHub\SeniorProject\Chatbot\ChatbotCore\obj\x86\Debug\SeniorProject.csproj.CoreCompileInputs.cache
-C:\Users\Administrator\Documents\GitHub\SeniorProject\Chatbot\ChatbotCore\bin\Debug\ConsoleApplication.exe
-C:\Users\Administrator\Documents\GitHub\SeniorProject\Chatbot\ChatbotCore\bin\Debug\ConsoleApplication.pdb
-C:\Users\Administrator\Documents\GitHub\SeniorProject\Chatbot\ChatbotCore\obj\x86\Debug\ConsoleApplication.exe
-C:\Users\Administrator\Documents\GitHub\SeniorProject\Chatbot\ChatbotCore\obj\x86\Debug\ConsoleApplication.pdb
