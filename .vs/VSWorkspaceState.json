@@ -3,8 +3,11 @@
     "",
     "\\Chatbot",
     "\\Chatbot\\ChatbotCore",
-    "\\Chatbot\\ChatbotCore\\DatabaseInteraction"
+    "\\Chatbot\\ChatbotCore\\DatabaseInteraction",
+    "\\Chatbot\\ChatbotCore\\MariaDBConnector",
+    "\\Chatbot\\ChatbotCore\\MariaDBConnector\\MariaDBConnector",
+    "\\Chatbot\\ChatbotCore\\Test"
   ],
-  "SelectedNode": "\\Chatbot\\ChatbotCore\\DatabaseInteraction\\databaseQueryInterface.cs",
+  "SelectedNode": "\\Chatbot\\ChatbotCore\\MariaDBConnector\\MariaDBConnector\\Form1.cs",
   "PreviewInSolutionExplorer": false
 }

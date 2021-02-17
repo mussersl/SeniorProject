@@ -29,20 +29,21 @@ namespace MariaDBConnector
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.DBConnector = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // DBConnector
             // 
-            this.button1.Location = new System.Drawing.Point(118, 173);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(117, 31);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.DBConnector.AccessibleName = "DBConnector";
+            this.DBConnector.Location = new System.Drawing.Point(118, 173);
+            this.DBConnector.Name = "DBConnector";
+            this.DBConnector.Size = new System.Drawing.Size(117, 31);
+            this.DBConnector.TabIndex = 0;
+            this.DBConnector.Text = "Connect to DB";
+            this.DBConnector.UseVisualStyleBackColor = true;
+            this.DBConnector.Click += new System.EventHandler(this.button1_Click);
             // 
             // dataGridView1
             // 
@@ -60,7 +61,7 @@ namespace MariaDBConnector
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(323, 230);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.DBConnector);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -71,7 +72,7 @@ namespace MariaDBConnector
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button DBConnector;
         private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

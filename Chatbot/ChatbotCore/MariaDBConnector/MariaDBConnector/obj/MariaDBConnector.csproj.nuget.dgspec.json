@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\shengj1\\source\\repos\\MariaDBConnector\\MariaDBConnector\\MariaDBConnector.csproj": {}
+    "C:\\Users\\shengj1\\Desktop\\SeniorProject\\Chatbot\\ChatbotCore\\MariaDBConnector\\MariaDBConnector\\MariaDBConnector.csproj": {}
   },
   "projects": {
-    "C:\\Users\\shengj1\\source\\repos\\MariaDBConnector\\MariaDBConnector\\MariaDBConnector.csproj": {
+    "C:\\Users\\shengj1\\Desktop\\SeniorProject\\Chatbot\\ChatbotCore\\MariaDBConnector\\MariaDBConnector\\MariaDBConnector.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\shengj1\\source\\repos\\MariaDBConnector\\MariaDBConnector\\MariaDBConnector.csproj",
+        "projectUniqueName": "C:\\Users\\shengj1\\Desktop\\SeniorProject\\Chatbot\\ChatbotCore\\MariaDBConnector\\MariaDBConnector\\MariaDBConnector.csproj",
         "projectName": "MariaDBConnector",
-        "projectPath": "C:\\Users\\shengj1\\source\\repos\\MariaDBConnector\\MariaDBConnector\\MariaDBConnector.csproj",
+        "projectPath": "C:\\Users\\shengj1\\Desktop\\SeniorProject\\Chatbot\\ChatbotCore\\MariaDBConnector\\MariaDBConnector\\MariaDBConnector.csproj",
         "packagesPath": "C:\\Users\\shengj1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\shengj1\\source\\repos\\MariaDBConnector\\MariaDBConnector\\obj\\",
+        "outputPath": "C:\\Users\\shengj1\\Desktop\\SeniorProject\\Chatbot\\ChatbotCore\\MariaDBConnector\\MariaDBConnector\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\shengj1\\AppData\\Roaming\\NuGet\\NuGet.Config",
