@@ -9,7 +9,18 @@ namespace Chatbot
     {
         public Answer assignRelevencyOf(Answer ans, List<string> keywords, List<string> recentKeywords) 
         {
-            return null;
+            double total = 0;
+            foreach(string key in keywords)
+            {
+                if (ans.keywords.ContainsKey(key))
+                {
+                    double temp;
+                    ans.keywords.TryGetValue(key, out temp);
+                    total += temp;
+                }
+            }
+            ans.relevency = total;
+            return ans;
         }
         public void sortAnswers(List<Answer> answers)
         {

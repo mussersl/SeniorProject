@@ -60,7 +60,6 @@
     <Compile Include="DatabaseInteraction\Answer.cs" />
     <Compile Include="DatabaseInteraction\DatabaseEditor.cs" />
     <Compile Include="DatabaseInteraction\databaseQueryInterface.cs" />
-    <Compile Include="DatabaseInteraction\getAnswerFromDatabase.cs" />
     <Compile Include="Test\Test.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
