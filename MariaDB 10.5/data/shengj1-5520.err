@@ -319,3 +319,8 @@ Version: '10.5.8-MariaDB'  socket: ''  port: 3306  mariadb.org binary distributi
 2021-03-18 14:15:27 20 [Warning] Access denied for user 'deveoper'@'localhost' (using password: YES)
 2021-03-18 14:30:25 23 [Warning] Access denied for user 'root'@'localhost' (using password: NO)
 2021-03-18 14:46:58 31 [Warning] Access denied for user 'developer'@'localhost' (using password: YES)
+2021-03-18 15:28:55 22 [Warning] Aborted connection 22 to db: 'unconnected' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2021-03-18 15:32:05 34 [Warning] Aborted connection 34 to db: 'irpachatbot' user: 'developer' host: 'localhost' (Got an error reading communication packets)
+2021-03-19 13:22:20 37 [Warning] Access denied for user 'developer'@'localhost' (using password: NO)
+2021-03-19 13:37:01 39 [Warning] Aborted connection 39 to db: 'irpachatbot' user: 'developer' host: 'localhost' (Got an error reading communication packets)
+2021-03-19 13:41:18 42 [Warning] Aborted connection 42 to db: 'irpachatbot' user: 'developer' host: 'localhost' (Got an error reading communication packets)

@@ -8,6 +8,6 @@
     "\\Chatbot\\ChatbotCore\\MariaDBConnector\\MariaDBConnector",
     "\\Chatbot\\ChatbotCore\\Test"
   ],
-  "SelectedNode": "\\Chatbot\\ChatbotCore\\MariaDBConnector\\MariaDBConnector\\Form1.cs",
+  "SelectedNode": "\\Chatbot\\ChatbotCore\\DatabaseInteraction\\Answer.cs",
   "PreviewInSolutionExplorer": false
 }
