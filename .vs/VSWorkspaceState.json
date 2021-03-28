@@ -1,13 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\Chatbot",
-    "\\Chatbot\\ChatbotCore",
-    "\\Chatbot\\ChatbotCore\\DatabaseInteraction",
-    "\\Chatbot\\ChatbotCore\\MariaDBConnector",
-    "\\Chatbot\\ChatbotCore\\MariaDBConnector\\MariaDBConnector",
-    "\\Chatbot\\ChatbotCore\\Test"
+    ""
   ],
-  "SelectedNode": "\\Chatbot\\ChatbotCore\\DatabaseInteraction\\Answer.cs",
-  "PreviewInSolutionExplorer": false
+  "SelectedNode": "\\Program.cs",
+  "PreviewInSolutionExplorer": true
 }

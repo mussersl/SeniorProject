@@ -1,0 +1,15 @@
+C:\Users\shengj1\Desktop\SeniorProject\bin\Release\net5.0\SeniorProject.exe
+C:\Users\shengj1\Desktop\SeniorProject\bin\Release\net5.0\SeniorProject.deps.json
+C:\Users\shengj1\Desktop\SeniorProject\bin\Release\net5.0\SeniorProject.runtimeconfig.json
+C:\Users\shengj1\Desktop\SeniorProject\bin\Release\net5.0\SeniorProject.runtimeconfig.dev.json
+C:\Users\shengj1\Desktop\SeniorProject\bin\Release\net5.0\SeniorProject.dll
+C:\Users\shengj1\Desktop\SeniorProject\bin\Release\net5.0\ref\SeniorProject.dll
+C:\Users\shengj1\Desktop\SeniorProject\bin\Release\net5.0\SeniorProject.pdb
+C:\Users\shengj1\Desktop\SeniorProject\bin\Release\net5.0\MySql.Data.DLL
+C:\Users\shengj1\Desktop\SeniorProject\obj\Release\net5.0\SeniorProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\shengj1\Desktop\SeniorProject\obj\Release\net5.0\SeniorProject.csproj.CoreCompileInputs.cache
+C:\Users\shengj1\Desktop\SeniorProject\obj\Release\net5.0\SeniorProject.csproj.CopyComplete
+C:\Users\shengj1\Desktop\SeniorProject\obj\Release\net5.0\SeniorProject.dll
+C:\Users\shengj1\Desktop\SeniorProject\obj\Release\net5.0\ref\SeniorProject.dll
+C:\Users\shengj1\Desktop\SeniorProject\obj\Release\net5.0\SeniorProject.pdb
+C:\Users\shengj1\Desktop\SeniorProject\obj\Release\net5.0\SeniorProject.genruntimeconfig.cache

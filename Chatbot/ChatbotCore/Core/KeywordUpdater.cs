@@ -13,7 +13,7 @@ namespace Chatbot
 			bool recentlyModified = false;
 			
 			//return false if the answer was recently modified this way
-			if(!recently Modified){
+			if(!recentlyModified){
 				return false;
 			}
 			//otherwise:
@@ -26,19 +26,26 @@ namespace Chatbot
 		}
 		
 		bool incrementKeywords(Answer ans, List<string> keywords){
-		
+
 			//access the database to update the keywords listed attached to the answer up to the max
-			
+
 			//add a timestamp for a recent increment in the DB
+			return false;
 			
 		}
 		
 		bool decrementKeywords(Answer ans, List<string> keywords){
-		
+
 			//access the database to update the keywords listed attached to the answer down to the min
-			
+
 			//add a timestamp for a recent decrement in the DB
-			
+
+			return false;
 		}
+
+        bool KeywordRelevencyUpdaterInterface.updateKeywords(Answer ans, List<string> keywords, bool correct)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
