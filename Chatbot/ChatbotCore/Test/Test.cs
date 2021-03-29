@@ -46,12 +46,12 @@ namespace Chatbot
 
             //    ResponseGeneratorInterface rg = new ResponseGeneratorR1();
             //    List<string> response = rg.generateResponse(listAns);
-            //    foreach(string an in response)
+            //    foreach (string an in response)
             //    {
             //        Console.WriteLine(an);
             //    };
 
-            //}
+            // }
             databaseConnectionTest();
 
         }
@@ -59,11 +59,17 @@ namespace Chatbot
         static void databaseConnectionTest()
         {
             DatabaseQueryInterface db = new Database();
+            //DatabaseEditor dbEditor = new Database();
             List<String> keywords = new List<string>();
             keywords.Add("what");
             keywords.Add("IRPA");
             keywords.Add("stand");
             db.queryDatabaseOnKeywords(keywords);
+
+            //Answer ans = new Answer("2", "example_question", "example_answer");
+            //Console.WriteLine(dbEditor.addQuestionToAnswer(ans));
+            //ans.ansString = "answer_changed";
+            //dbEditor.editAnswer(ans);
         }
     }
 }

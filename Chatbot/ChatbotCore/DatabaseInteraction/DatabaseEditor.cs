@@ -4,18 +4,14 @@ using System.Collections.Generic;
 
 namespace Chatbot
 {
-    abstract class DatabaseEditor
+    interface DatabaseEditor
     {
-        DatabaseQueryInterface dq;
-        public DatabaseEditor(DatabaseQueryInterface dqi)
-        {
-            dq = dqi;
-        }
 
-        public abstract bool addQuestionToAnswer(string question, Answer ans, Dictionary<string, List<string>> keywords);
+        //public bool addQuestionToAnswer(Answer ans);
 
         //These may be the same
-        public abstract bool addAnswer(Answer ans);
-        public abstract bool editAnswer(Answer ans);
+        public bool addAnswer(Answer ans);
+       
+        public bool editAnswer(Answer ans);
     }
 }

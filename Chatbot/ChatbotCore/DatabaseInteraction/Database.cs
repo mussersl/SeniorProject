@@ -5,38 +5,76 @@ using MySql.Data.MySqlClient;
 
 namespace ChatbotCore.DatabaseInteraction
 {
-    public class Database : DatabaseQueryInterface
+    public class Database : DatabaseQueryInterface, DatabaseEditor
     {
-        
-     
+        public MySql.Data.MySqlClient.MySqlConnection connect;
+        public Database()
+        {
+            connect = new MySql.Data.MySqlClient.MySqlConnection();
+        }
         
         public void connection(){
-            MySql.Data.MySqlClient.MySqlConnection connect = new MySql.Data.MySqlClient.MySqlConnection();
             string myConnectString = "server=127.0.0.1;port=3306;Database=irpachatbot;uid=root;pwd=rhit2020;";
-            MySqlDataReader myReader;
             connect.ConnectionString = myConnectString;
             try
             {
                 connect.Open();
-                Console.WriteLine(2);
-                
-                String selectQuery = "select ansString from answers where question = 'what does IRPA stand for?';";
-                MySqlCommand myCommand = new MySqlCommand(selectQuery, connect);       
-                myReader = myCommand.ExecuteReader();
-                // Always call Read before accessing data.
-                while (myReader.Read())
-                {
-                    Console.WriteLine(myReader.GetString(0));
-                }
-                // always call Close when done reading.
-                myReader.Close();
-                connect.Close();
-
-
+                Console.WriteLine("MariaDB connected: " + myConnectString);
             }
             catch(MySql.Data.MySqlClient.MySqlException ex){
-                // MessageBox.Show(ex.Message);
                 Console.WriteLine(ex);
+            }
+        }
+
+
+        bool DatabaseEditor.addAnswer(Answer ans)
+        {
+            try
+            {
+                connection();
+                String SQLQuery = "INSERT INTO answers VALUES(@name1, @name2, @name3); ";
+                
+                MySqlCommand myCommand = new MySqlCommand(SQLQuery, connect);
+                myCommand.Parameters.AddWithValue("name1", ans.answerID);
+                myCommand.Parameters.AddWithValue("name2", ans.questionString);
+                myCommand.Parameters.AddWithValue("name3", ans.ansString);
+
+                int i = myCommand.ExecuteNonQuery();
+                Console.WriteLine(1);
+                connect.Close();
+                return true;
+
+            }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+        }
+
+        bool DatabaseEditor.editAnswer(Answer ans)
+        {
+            try
+            {
+                connection();
+                String SQLQuery = "UPDATE answers SET ansString = @name3, question = @name2 " +
+                    "WHERE ansID = @name1; ";
+
+                MySqlCommand myCommand = new MySqlCommand(SQLQuery, connect);
+                myCommand.Parameters.AddWithValue("name1", ans.answerID);
+                myCommand.Parameters.AddWithValue("name2", ans.questionString);
+                myCommand.Parameters.AddWithValue("name3", ans.ansString);
+
+                int i = myCommand.ExecuteNonQuery();
+                Console.WriteLine(1);
+                connect.Close();
+                return true;
+
+            }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                Console.WriteLine(ex);
+                return false;
             }
         }
 
@@ -47,15 +85,10 @@ namespace ChatbotCore.DatabaseInteraction
 
         List<Answer> DatabaseQueryInterface.queryDatabaseOnKeywords(List<string> keywords)
         {
-            MySql.Data.MySqlClient.MySqlConnection connect = new MySql.Data.MySqlClient.MySqlConnection();
-            string myConnectString = "server=127.0.0.1;port=3306;Database=irpachatbot;uid=root;pwd=rhit2020;";
             List<Answer> output = new List<Answer>();
-
-            connect.ConnectionString = myConnectString;
             try
             {
-                connect.Open();
-                Console.WriteLine(2);
+                connection();
 
                 foreach (String keyword in keywords)
                 {
@@ -116,17 +149,10 @@ namespace ChatbotCore.DatabaseInteraction
             }
             catch (MySql.Data.MySqlClient.MySqlException ex)
             {
-                // MessageBox.Show(ex.Message);
                 Console.WriteLine(ex);
             }
             return null;
         }
-
-        //    public void closeConnect()
-        //    {
-        //        connect.ConnectionString = myConnectString;
-        //        connect.Close();
-        //    }
     }
 }
 

@@ -6,13 +6,17 @@ namespace Chatbot
 {
     public class Answer
     {
-        private string ansID;
-        private string ansString;
-        private string questionString;
+        public string answerID;
+        public string ansString;
+        public string questionString;
+
+        public Answer()
+        {
+        }
 
         public Answer(string ansID, string question, string ansString)
         {
-            this.ansID = ansID;
+            this.answerID = ansID;
             this.questionString = question;
             this.ansString = ansString;
         }
