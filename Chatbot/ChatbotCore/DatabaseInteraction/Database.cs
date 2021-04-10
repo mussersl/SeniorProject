@@ -78,6 +78,8 @@ namespace ChatbotCore.DatabaseInteraction
             }
         }
 
+
+        //I feel like this should maybe be one answer, rather than a list of them.
         List<Answer> DatabaseQueryInterface.queryDatabaseOnAnswer(Answer ans)
         {
             throw new NotImplementedException();
