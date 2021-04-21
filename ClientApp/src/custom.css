@@ -1,0 +1,58 @@
+
+body {
+    background: #DDDDDD;
+}
+
+.navbar {
+    background-color: #800000;
+    color: white;
+}
+
+a.navbar-brand{
+    color: white;
+}
+
+.page-container {
+    margin-top: 75px;
+}
+
+#chatlog-window,
+#questioninput {
+    border: 2px solid black;
+}
+
+#chatlog-window {
+    overflow: scroll;
+    height: 400px;
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 15px 15px;
+}
+
+#questioninput {
+    color: black;
+}
+
+#ask-button {
+    background-color: #800000;
+    color: white;
+}
+
+.bot-text {
+    background-color: #800000;
+    color: white;
+}
+
+.user-text {
+    background-color: gray;
+    margin-left: auto;
+}
+
+.bot-text,
+.user-text {
+    border-radius: 10px;
+    max-width: 200px;
+    width: max-content;
+    padding: 10px 10px;
+    margin-top: 5px;
+}
