@@ -8,8 +8,8 @@ body {
     color: white;
 }
 
-a.navbar-brand{
-    color: white;
+a.navbar-brand {
+    color: white !important;
 }
 
 .page-container {
@@ -33,9 +33,15 @@ a.navbar-brand{
     color: black;
 }
 
-#ask-button {
+.btn {
     background-color: #800000;
     color: white;
+    border-color: #800000;
+}
+
+.btn:hover {
+    background-color: #600000;
+    border-color: #600000;
 }
 
 .bot-text {
@@ -55,4 +61,33 @@ a.navbar-brand{
     width: max-content;
     padding: 10px 10px;
     margin-top: 5px;
+}
+
+#dataEntries {
+    min-height: 100px;
+}
+
+.dialog {
+    border: 2px solid black;
+    background-color: white;
+}
+
+.crud {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.crudButton {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+}
+
+.editAnswer,
+.deleteAnswer {
+    width: 75px;
+}
+
+#addAnswer {
+    margin-bottom: 5px;
 }

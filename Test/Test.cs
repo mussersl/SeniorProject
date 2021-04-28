@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 using Chatbot;
 using System.Collections.Generic;
 using ChatbotCore.DatabaseInteraction;
@@ -78,3 +79,4 @@ namespace Chatbot
         }
     }
 }
+*/

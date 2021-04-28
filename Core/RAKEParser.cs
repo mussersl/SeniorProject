@@ -1,3 +1,4 @@
+/*
 using System;
 using Chatbot;
 using System.Collections.Generic;
@@ -88,3 +89,4 @@ namespace Chatbot
 		
     }
 }
+*/
