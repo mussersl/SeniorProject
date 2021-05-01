@@ -27,9 +27,9 @@ export class Home extends Component {
             count: this.state.count + 1
         });
 
-//        // clear question from text input
-//        document.getElementById("questioninput").value = "";
-//
+        // clear question from text input
+        document.getElementById("questioninput").value = "";
+
         // Query chatBot
 
         let response = this.chatBotAskQuestion(question);
@@ -71,6 +71,12 @@ export class Home extends Component {
         return uitems;
     }
 
+    handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            this.askButton()
+        }
+        return;
+    }
 
   render () {
       return (
@@ -87,7 +93,7 @@ export class Home extends Component {
                       </div>
                       <div id="textbox">
                           <div class="form-group">
-                              <textarea class="form-control" id="questioninput" rows="3"></textarea>
+                              <textarea onKeyDown={this.handleKeyPress} class="form-control" id="questioninput" rows="3"></textarea>
                           </div>
                       </div>
                       <button id="ask-button" class="btn btn-primary" type="submit" onClick={this.askButton}>Ask</button>
