@@ -44,6 +44,21 @@ a.navbar-brand {
     border-color: #600000;
 }
 
+.btn:focus {
+    background-color: #400000;
+    border-color: #400000;
+}
+
+.btn:active {
+    background-color: #600000 !important;
+    border-color: #600000 !important;
+}
+
+.btn:visited {
+    background-color: #800000;
+    border-color: #800000;
+}
+
 .bot-text {
     background-color: #800000;
     color: white;
@@ -58,7 +73,6 @@ a.navbar-brand {
 .user-text {
     border-radius: 10px;
     max-width: 200px;
-    width: max-content;
     padding: 10px 10px;
     margin-top: 5px;
 }
@@ -70,6 +84,8 @@ a.navbar-brand {
 .dialog {
     border: 2px solid black;
     background-color: white;
+    margin-bottom: 2px;
+    margin-top: 2px;
 }
 
 .crud {
