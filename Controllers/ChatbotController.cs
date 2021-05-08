@@ -18,9 +18,12 @@ namespace SeniorProj.Controllers
         }
 
         [HttpGet]
-        public string Get(string question)
+        public Func<string, string> Get(string question)
         {
-            return "question received" + question;
+            return (string question) =>
+            {
+                return "question received: " + question;
+            };
         }
     }
 }

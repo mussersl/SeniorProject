@@ -5,16 +5,17 @@ export class Home extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { chatList: [],count: 0, dumbLearning: 0 };
+        this.state = { chatList: [],count: 0, dumbLearning: 0, askFunc };
         this.askButton = this.askButton.bind(this);
         this.renderlog = this.renderlog.bind(this);
         this.chatBotAskQuestion = this.chatBotAskQuestion.bind(this);
     }
 
-    /*id = {
-        BOT: 0,
-        USER: 1
-    }*/
+    //async componentDidMount() {
+    //    const result = await fetch('https://localhost:44348/chat/user');
+    //   const ask = await result.json();
+    //    this.setState({ askFunc: ask });
+    //}
 
     // Function attacched to ask button
     askButton() {
@@ -32,7 +33,7 @@ export class Home extends Component {
 
         // Query chatBot
 
-        let response = this.chatBotAskQuestion(question);
+        //let response = this.state.askFunc(question);//this.chatBotAskQuestion(question);
         this.state.chatList.push(new speech(response, 0));
         this.setState({
             chatList: this.state.chatList,
