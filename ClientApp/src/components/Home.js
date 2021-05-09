@@ -1,3 +1,4 @@
+import { error } from 'jquery';
 import React, { Component } from 'react';
 
 export class Home extends Component {
@@ -5,19 +6,39 @@ export class Home extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { chatList: [],count: 0, dumbLearning: 0, askFunc };
+        this.state = { chatList: [], count: 0, dumbLearning: 0, askFunc: function (x) { return "F" } };
         this.askButton = this.askButton.bind(this);
         this.renderlog = this.renderlog.bind(this);
         this.chatBotAskQuestion = this.chatBotAskQuestion.bind(this);
     }
 
-    //async componentDidMount() {
-    //    const result = await fetch('https://localhost:44348/chat/user');
-    //   const ask = await result.json();
-    //    this.setState({ askFunc: ask });
-    //}
+    async componentDidMount() {
+        this.state.chatList.push(new speech("Chatbot Starting Up. Please be patient", 0));
+        this.setState({
+            chatList: this.state.chatList,
+            count: this.state.count + 1
+        });
 
-    // Function attacched to ask button
+        const result = await fetch('AskFunc');
+        this.state.chatList.push(new speech(String(result.ok), 0));
+        this.setState({
+            chatList: this.state.chatList,
+            count: this.state.count + 1
+        });
+
+        const ask = await result.json();
+        this.state.setState({ askFunc: ask.ask });
+
+        this.state.chatList.push(new speech("Chatbot Online.", 0));
+        this.setState({
+            chatList: this.state.chatList,
+            count: this.state.count + 1
+        });
+
+        this.render();
+    }
+
+    // Function attached to ask button
     askButton() {
         let question = document.getElementById("questioninput").value;
 
@@ -33,7 +54,8 @@ export class Home extends Component {
 
         // Query chatBot
 
-        //let response = this.state.askFunc(question);//this.chatBotAskQuestion(question);
+        let response = this.state.askFunc(question);
+        //let response = this.chatBotAskQuestion(question);
         this.state.chatList.push(new speech(response, 0));
         this.setState({
             chatList: this.state.chatList,

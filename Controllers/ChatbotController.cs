@@ -8,22 +8,21 @@ using System.Threading.Tasks;
 namespace SeniorProj.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("AskFunc")]
     public class ChatbotController : ControllerBase
     {
-        
-        public ChatbotController()
+        private readonly ILogger<ChatbotController> _logger;
+
+        public ChatbotController(ILogger<ChatbotController> logger)
         {
-            
+            _logger = logger;
         }
 
+
         [HttpGet]
-        public Func<string, string> Get(string question)
+        public async Task<ActionResult> Get()
         {
-            return (string question) =>
-            {
-                return "question received: " + question;
-            };
+            return Ok(new AskFunction());
         }
     }
 }
