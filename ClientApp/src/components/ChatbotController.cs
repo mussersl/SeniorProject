@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace SeniorProj.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("Chatbot")]
     public class ChatbotController : ControllerBase
     {
         private readonly ILogger<ChatbotController> _logger;
@@ -19,10 +19,10 @@ namespace SeniorProj.Controllers
             _logger = logger;
         }
 
-        [HttpGet, Route("ask")]
-        public async Task<ActionResult> Get()
+        [HttpGet, Route("Ask")]
+        public string Ask()
         {
-            return Ok(new AskFunction());
+            return "Connected";
         }
 
         public static string AskTheBot(string question)

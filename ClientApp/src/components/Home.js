@@ -19,17 +19,12 @@ export class Home extends Component {
             count: this.state.count + 1
         });
 
-        const result = await fetch('ChatBot/ask');
+        const result = await fetch('ChatBot/Connect');
+        const response = await result.text();
+        this.setState({ data: response });
 
-        this.state.chatList.push(new speech(result.ok, 0));
-        this.setState({
-            chatList: this.state.chatList,
-            count: this.state.count + 1
-        });
-        const response = await result.json();
-        this.state.setState({ data: response });
-
-        this.state.chatList.push(new speech("Chatbot Online. " + this.state.data, 0));
+        this.state.chatList.splice(0, 1);
+        this.state.chatList.push(new speech(this.state.data, 0));
         this.setState({
             chatList: this.state.chatList,
             count: this.state.count + 1
