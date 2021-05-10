@@ -6,7 +6,7 @@ export class Home extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { chatList: [], count: 0, dumbLearning: 0, askFunc: function (x) { return "F" } };
+        this.state = { chatList: [], count: 0, dumbLearning: 0, data: "F" };
         this.askButton = this.askButton.bind(this);
         this.renderlog = this.renderlog.bind(this);
         this.chatBotAskQuestion = this.chatBotAskQuestion.bind(this);
@@ -19,17 +19,17 @@ export class Home extends Component {
             count: this.state.count + 1
         });
 
-        const result = await fetch('AskFunc');
-        this.state.chatList.push(new speech(String(result.ok), 0));
+        const result = await fetch('ChatBot/ask');
+
+        this.state.chatList.push(new speech(result.ok, 0));
         this.setState({
             chatList: this.state.chatList,
             count: this.state.count + 1
         });
+        const response = await result.json();
+        this.state.setState({ data: response });
 
-        const ask = await result.json();
-        this.state.setState({ askFunc: ask.ask });
-
-        this.state.chatList.push(new speech("Chatbot Online.", 0));
+        this.state.chatList.push(new speech("Chatbot Online. " + this.state.data, 0));
         this.setState({
             chatList: this.state.chatList,
             count: this.state.count + 1
@@ -54,7 +54,9 @@ export class Home extends Component {
 
         // Query chatBot
 
-        let response = this.state.askFunc(question);
+        let response = "F";
+
+
         //let response = this.chatBotAskQuestion(question);
         this.state.chatList.push(new speech(response, 0));
         this.setState({
@@ -131,7 +133,7 @@ export class Home extends Component {
                               <textarea onKeyDown={this.handleKeyPress} class="form-control" id="questioninput" rows="3"></textarea>
                           </div>
                       </div>
-                      <button id="ask-button" class="btn btn-primary" type="submit" onClick={this.askButton}>Ask</button>
+                      <button id="ask-button" class="btn btn-primary" type="submit" onClick={this.askButton.bind(this)}>Ask</button>
                   </div>
               </div>
 

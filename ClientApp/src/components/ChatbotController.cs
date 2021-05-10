@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace SeniorProj.Controllers
 {
     [ApiController]
-    [Route("AskFunc")]
+    [Route("[controller]")]
     public class ChatbotController : ControllerBase
     {
         private readonly ILogger<ChatbotController> _logger;
@@ -18,11 +19,16 @@ namespace SeniorProj.Controllers
             _logger = logger;
         }
 
-
-        [HttpGet]
+        [HttpGet, Route("ask")]
         public async Task<ActionResult> Get()
         {
             return Ok(new AskFunction());
         }
+
+        public static string AskTheBot(string question)
+        {
+            return "Question: " + question;
+        }
+
     }
 }
