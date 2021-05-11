@@ -19,10 +19,10 @@ namespace SeniorProj.Controllers
             _logger = logger;
         }
 
-        [HttpGet, Route("Ask")]
-        public string Ask()
+        [HttpGet, Route("Connect")]
+        public string Connect()
         {
-            return "Connected";
+            return "Welcome to the IRPA frequently asked questions chatbot.";
         }
 
         public static string AskTheBot(string question)

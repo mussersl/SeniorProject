@@ -20,6 +20,7 @@ export class Home extends Component {
         });
 
         const result = await fetch('ChatBot/Connect');
+        console.log(result);
         const response = await result.text();
         this.setState({ data: response });
 
