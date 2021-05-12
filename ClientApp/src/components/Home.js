@@ -6,7 +6,7 @@ export class Home extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { chatList: [], count: 0, dumbLearning: 0, data: "F" };
+        this.state = { chatList: [], count: 0, dumbLearning: 0 };
         this.askButton = this.askButton.bind(this);
         this.renderlog = this.renderlog.bind(this);
         this.chatBotAskQuestion = this.chatBotAskQuestion.bind(this);
@@ -22,10 +22,9 @@ export class Home extends Component {
         const result = await fetch('ChatBot/Connect');
         console.log(result);
         const response = await result.text();
-        this.setState({ data: response });
 
         this.state.chatList.splice(0, 1);
-        this.state.chatList.push(new speech(this.state.data, 0));
+        this.state.chatList.push(new speech(response, 0));
         this.setState({
             chatList: this.state.chatList,
             count: this.state.count + 1
@@ -35,7 +34,7 @@ export class Home extends Component {
     }
 
     // Function attached to ask button
-    askButton() {
+    async askButton() {
         let question = document.getElementById("questioninput").value;
 
         // add question to log
@@ -49,9 +48,8 @@ export class Home extends Component {
         document.getElementById("questioninput").value = "";
 
         // Query chatBot
-
-        let response = "F";
-
+        const result = await fetch('ChatBot/Ask/' + question);
+        const response = await result.text();
 
         //let response = this.chatBotAskQuestion(question);
         this.state.chatList.push(new speech(response, 0));

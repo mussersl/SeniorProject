@@ -14,6 +14,8 @@ namespace SeniorProj.Controllers
     {
         private readonly ILogger<ChatbotController> _logger;
 
+        private string question = "";
+
         public ChatbotController(ILogger<ChatbotController> logger)
         {
             _logger = logger;
@@ -30,5 +32,10 @@ namespace SeniorProj.Controllers
             return "Question: " + question;
         }
 
+        [HttpGet, Route("Ask/{question}")]
+        public string Ask(string question)
+        {
+            return "Question asked: " + question;
+        }
     }
 }

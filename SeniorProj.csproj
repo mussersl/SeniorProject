@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Controllers\ChatbotController.cs" />
     <None Include="DatabaseInteraction\.script_temp\4t6eelx.csx" />
     <None Include="DatabaseInteraction\.script_temp\sgklseff.csx" />
     <None Include="DatabaseInteraction\.script_temp\sqcamg4.csx" />
