@@ -1,8 +1,6 @@
 ﻿using System;
 using Chatbot;
 using System.Collections.Generic;
-using ChatbotCore.DatabaseInteraction;
-
 
 namespace Chatbot
 {
@@ -10,6 +8,7 @@ namespace Chatbot
     {
         static void Main(string[] args)
         {
+            DatabaseQueryInterface db = new Chatbot.Database();
             //ControlFlow control = new ControlFlow();
             //while (true)
             //{
@@ -52,19 +51,16 @@ namespace Chatbot
             //    };
 
             // }
-            databaseConnectionTest();
-
         }
 
         static void databaseConnectionTest()
         {
-            DatabaseQueryInterface db = new Database();
             //DatabaseEditor dbEditor = new Database();
-            List<String> keywords = new List<string>();
-            keywords.Add("what");
-            keywords.Add("IRPA");
-            keywords.Add("stand");
-            db.queryDatabaseOnKeywords(keywords);
+            //List<String> keywords = new List<string>();
+            //keywords.Add("what");
+            //keywords.Add("IRPA");
+            //keywords.Add("stand");
+            //db.queryDatabaseOnKeywords(keywords);
 
             //Answer ans = new Answer("2", "example_question", "example_answer");
             //Console.WriteLine(dbEditor.addQuestionToAnswer(ans));

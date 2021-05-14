@@ -10,8 +10,8 @@ namespace Chatbot
         //public bool addQuestionToAnswer(Answer ans);
 
         //These may be the same
-        public bool addAnswer(Answer ans);
+        bool addAnswer(Answer ans);
        
-        public bool editAnswer(Answer ans);
+        bool editAnswer(Answer ans);
     }
 }

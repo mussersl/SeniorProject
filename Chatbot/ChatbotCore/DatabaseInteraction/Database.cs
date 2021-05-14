@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Chatbot;
 using MySql.Data.MySqlClient;
 
-namespace ChatbotCore.DatabaseInteraction
+namespace Chatbot
 {
     public class Database : DatabaseQueryInterface, DatabaseEditor
     {
@@ -14,7 +14,7 @@ namespace ChatbotCore.DatabaseInteraction
         }
         
         public void connection(){
-            string myConnectString = "server=127.0.0.1;port=3306;Database=irpachatbot;uid=root;pwd=rhit2020;";
+            string myConnectString = "server=127.0.0.1;port=3300;Database=IRPAchatbot;uid=root;pwd=test;";
             connect.ConnectionString = myConnectString;
             try
             {
