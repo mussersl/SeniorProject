@@ -57,8 +57,8 @@ namespace Chatbot
             try
             {
                 connection();
-                String SQLQuery = "UPDATE answers SET ansString = @name3, question = @name2 " +
-                    "WHERE ansID = @name1; ";
+                String SQLQuery = "UPDATE answers SET Answer = @name3, Question = @name2 " +
+                    "WHERE ID = @name1; ";
 
                 MySqlCommand myCommand = new MySqlCommand(SQLQuery, connect);
                 myCommand.Parameters.AddWithValue("name1", ans.answerID);
@@ -94,14 +94,14 @@ namespace Chatbot
 
                 foreach (String keyword in keywords)
                 {
-                    String selectAnsStringQuery = "SELECT ansString FROM answers WHERE ansID " +
-                        "= (SELECT ansID FROM relevancy WHERE wordID = (SELECT wordID FROM words WHERE" +
-                        " wordString = '" + keyword + "')); ";
-                    String selectAnsIDQuery = "SELECT ansID FROM relevancy WHERE wordID = (SELECT wordID FROM words WHERE" +
-                        " wordString = '" + keyword + "'); ";
-                    String selectQuestionQuery = "SELECT question FROM answers WHERE ansID " +
-                        "= (SELECT ansID FROM relevancy WHERE wordID = (SELECT wordID FROM words WHERE" +
-                        " wordString = '" + keyword + "')); ";
+                    String selectAnsStringQuery = "SELECT Answer FROM answers WHERE ID " +
+                        "= (SELECT KeywordID FROM keyword_relevancy WHERE AnswerID = (SELECT ID FROM keywords WHERE" +
+                        " Keyword = '" + keyword + "')); ";
+                    String selectAnsIDQuery = "SELECT AnswerID FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
+                        " Keyword = '" + keyword + "'); ";
+                    String selectQuestionQuery = "SELECT Question FROM answers WHERE ID " +
+                        "= (SELECT AnswerID FROM relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
+                        " Keyword = '" + keyword + "')); ";
                     
                     
                     MySqlDataReader myReader;
