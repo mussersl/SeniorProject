@@ -1,0 +1,109 @@
+
+body {
+    background: #DDDDDD;
+}
+
+.navbar {
+    background-color: #800000;
+    color: white;
+}
+
+a.navbar-brand {
+    color: white !important;
+}
+
+.page-container {
+    margin-top: 75px;
+}
+
+#chatlog-window,
+#questioninput {
+    border: 2px solid black;
+}
+
+#chatlog-window {
+    overflow: scroll;
+    height: 400px;
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 15px 15px;
+}
+
+#questioninput {
+    color: black;
+}
+
+.btn {
+    background-color: #800000;
+    color: white;
+    border-color: #800000;
+}
+
+.btn:hover {
+    background-color: #600000;
+    border-color: #600000;
+}
+
+.btn:focus {
+    background-color: #400000;
+    border-color: #400000;
+}
+
+.btn:active {
+    background-color: #600000 !important;
+    border-color: #600000 !important;
+}
+
+.btn:visited {
+    background-color: #800000;
+    border-color: #800000;
+}
+
+.bot-text {
+    background-color: #800000;
+    color: white;
+}
+
+.user-text {
+    background-color: gray;
+    margin-left: auto;
+}
+
+.bot-text,
+.user-text {
+    border-radius: 10px;
+    max-width: 200px;
+    padding: 10px 10px;
+    margin-top: 5px;
+}
+
+#dataEntries {
+    min-height: 100px;
+}
+
+.dialog {
+    border: 2px solid black;
+    background-color: white;
+    margin-bottom: 2px;
+    margin-top: 2px;
+}
+
+.crud {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.crudButton {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+}
+
+.editAnswer,
+.deleteAnswer {
+    width: 75px;
+}
+
+#addAnswer {
+    margin-bottom: 5px;
+}
