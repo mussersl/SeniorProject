@@ -8,7 +8,7 @@ namespace Chatbot
     {
         static void Main(string[] args)
         {
-            DatabaseQueryInterface db = new Chatbot.Database();
+            DatabaseQueryInterface db = new Database();
             //ControlFlow control = new ControlFlow();
             //while (true)
             //{
