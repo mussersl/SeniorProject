@@ -1,6 +1,7 @@
 ﻿using System;
 using Chatbot;
 using System.Collections.Generic;
+using Chatbot.Database;
 
 namespace Chatbot
 {
