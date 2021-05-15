@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Chatbot;
 
 
 namespace SeniorProj.Controllers
@@ -27,15 +28,11 @@ namespace SeniorProj.Controllers
             return "Welcome to the IRPA frequently asked questions chatbot.";
         }
 
-        public static string AskTheBot(string question)
-        {
-            return "Question: " + question;
-        }
-
         [HttpGet, Route("Ask/{question}")]
         public string Ask(string question)
         {
-            return "Question asked: " + question;
+            string temp = new ControlFlow().askQuestion(question);
+            return temp;
         }
     }
 }
