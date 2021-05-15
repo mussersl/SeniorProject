@@ -22,11 +22,6 @@
 
   <ItemGroup>
     <None Include="Controllers\ChatbotController.cs" />
-    <None Include="DatabaseInteraction\.script_temp\4t6eelx.csx" />
-    <None Include="DatabaseInteraction\.script_temp\sgklseff.csx" />
-    <None Include="DatabaseInteraction\.script_temp\sqcamg4.csx" />
-    <None Include="DatabaseInteraction\.script_temp\vno5e2a.csx" />
-    <None Include="DatabaseInteraction\.script_temp\yefik6m.csx" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
