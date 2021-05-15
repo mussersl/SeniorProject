@@ -1,6 +1,0 @@
-
-*.cache
-*.ide-shm
-Chatbot/ChatbotCore/.vs/SeniorProject/DesignTimeBuild/.dtbcache
-Chatbot/ChatbotCore/.vs/SeniorProject/v15/.suo
-Chatbot/ChatbotCore/.vs/SeniorProject/v15/Server/sqlite3/storage.ide-shm
