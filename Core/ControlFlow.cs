@@ -15,6 +15,7 @@ namespace Chatbot
         {
             this.wordParser = new AllWordsParser(); 
             this.db = new Database();
+            this.db.connection();
             //DatabaseEditor dbEditor = new Database();
             List<String> keywords = new List<string>();
         }
