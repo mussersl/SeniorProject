@@ -6,9 +6,8 @@ namespace Chatbot
 {
     public class ControlFlow
     {
-        private Dictionary<string, double> recentKeywords;
         private KeywordParserInterface wordParser;
-        private DatabaseQueryInterface db;
+        private Database db;
 
         //Constructor
         public ControlFlow()
