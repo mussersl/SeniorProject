@@ -58,7 +58,7 @@ namespace Chatbot
                 };
 
              }
-            //databaseConnectionTest();
+            databaseConnectionTest();
 
         }
 
@@ -70,7 +70,7 @@ namespace Chatbot
             keywords.Add("what");
             keywords.Add("IRPA");
             keywords.Add("stand");
-            db.queryDatabaseOnKeywords(keywords);
+            //db.queryDatabaseOnKeywords(keywords);
 
             //Answer ans = new Answer("2", "example_question", "example_answer");
             //Console.WriteLine(dbEditor.addQuestionToAnswer(ans));

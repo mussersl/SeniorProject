@@ -8,11 +8,15 @@ namespace Chatbot
     {
         private Dictionary<string, double> recentKeywords;
         private KeywordParserInterface wordParser;
+        private DatabaseQueryInterface db;
 
         //Constructor
         public ControlFlow()
         {
-            this.wordParser = new AllWordsParser();
+            this.wordParser = new AllWordsParser(); 
+            this.db = new Database();
+            //DatabaseEditor dbEditor = new Database();
+            List<String> keywords = new List<string>();
         }
 
         public string askQuestion(string question)
