@@ -14,7 +14,7 @@ namespace Chatbot
         }
         
         public void connection(){
-            string myConnectString = "server=192.168.1.101; port=3300;Database=IRPAchatbot;uid=root;pwd=test;";
+            string myConnectString = "server=137.112.237.224; port=3300;Database=IRPAChatbot;uid=root;pwd=test;";
             connect.ConnectionString = myConnectString;
             try
             {
