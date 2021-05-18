@@ -6,6 +6,7 @@ export class Management extends Component {
 
     constructor(props) {
         super(props);
+        //Call chatbot to populate list
         this.state = {index: 0, count: 0, questions: [], answers: [], edit: -1 };
         this.state.questions.push("How many students are enrolled?");
         this.state.answers.push("The number of students enrolled at Rose-Hulman in the year 2020 is 2038.");
