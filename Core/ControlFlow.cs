@@ -7,14 +7,13 @@ namespace Chatbot
     public class ControlFlow
     {
         private KeywordParserInterface wordParser;
-        private Database db;
+        private DatabaseQueryInterface db;
 
         //Constructor
         public ControlFlow()
         {
             this.wordParser = new AllWordsParser(); 
             this.db = new Database();
-            this.db.connection();
             //DatabaseEditor dbEditor = new Database();
             List<String> keywords = new List<string>();
         }
@@ -22,7 +21,23 @@ namespace Chatbot
         public string askQuestion(string question)
         {
             List<string> questionKeywords = wordParser.parseQuestion(question);
-            return  "Keywords parsed : " + questionKeywords.Count;
+            List<Answer> answers = db.queryDatabaseOnKeywords(questionKeywords);
+            if(answers == null)
+            {
+                return "I'm sorry. I can't answer your question right now.";
+            }
+            else if (answers.Count == 0)
+            {
+                return "I'm sorry. I don't understand the question.";
+            }
+            else
+            {
+                foreach(Answer a in answers)
+                {
+                    a.printToConsole();
+                }
+                return answers[0].ansString;
+            }
         }
 
         public bool addAnswer(List<string> questions, string answer)

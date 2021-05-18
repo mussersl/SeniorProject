@@ -29,5 +29,12 @@ namespace Chatbot
 
         //Assigned by relevencyAnlyzer
         public double relevency { get; set; }
+
+        public void printToConsole()
+        {
+            Console.WriteLine("AnswerID: " + answerID);
+            Console.WriteLine("Answer: " + ansString);
+            Console.WriteLine("Question: " + questionString);
+        }
     }
 }

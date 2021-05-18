@@ -14,7 +14,7 @@ namespace Chatbot
         }
         
         public void connection(){
-            string myConnectString = "server=137.112.237.224; port=3300;Database=IRPAChatbot;uid=root;pwd=test;";
+            string myConnectString = "server=137.112.237.224; port=3300;Database=body;uid=root;pwd=test;";
             connect.ConnectionString = myConnectString;
             try
             {
@@ -22,7 +22,7 @@ namespace Chatbot
                 Console.WriteLine("MariaDB connected: " + myConnectString);
             }
             catch(MySql.Data.MySqlClient.MySqlException ex){
-                Console.WriteLine(ex);
+                Console.WriteLine("Error received: "+ex);
             }
         }
 
@@ -96,12 +96,12 @@ namespace Chatbot
                 foreach (String keyword in keywords)
                 {
                     String selectAnsStringQuery = "SELECT Answer FROM answers WHERE ID " +
-                        "= (SELECT KeywordID FROM keyword_relevancy WHERE AnswerID = (SELECT ID FROM keywords WHERE" +
+                        "= (SELECT AnswerID FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
                         " Keyword = '" + keyword + "')); ";
                     String selectAnsIDQuery = "SELECT AnswerID FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
                         " Keyword = '" + keyword + "'); ";
                     String selectQuestionQuery = "SELECT Question FROM answers WHERE ID " +
-                        "= (SELECT AnswerID FROM relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
+                        "= (SELECT AnswerID FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
                         " Keyword = '" + keyword + "')); ";
                     
                     
