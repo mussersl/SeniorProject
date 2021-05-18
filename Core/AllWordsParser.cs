@@ -6,13 +6,14 @@ namespace Chatbot
 {
     public class AllWordsParser : KeywordParserInterface
     {
-        
-		public List<string> parseQuestion(string question){
+
+        public List<string> parseQuestion(string question)
+        {
             string temp = question.ToLower();
-			List<string> words = new List<string>(temp.Split(' '));
+            List<string> words = new List<string>(temp.Split(' '));
             EnglishSmartStopWordFilter ssf = new EnglishSmartStopWordFilter();
             List<string> keywords = new List<string>();
-            foreach(string s in words)
+            foreach (string s in words)
             {
                 if (!ssf.IsStopWord(s))
                 {
@@ -20,7 +21,7 @@ namespace Chatbot
                 }
             }
             return keywords;
-		}
-		
+        }
+
     }
 }
