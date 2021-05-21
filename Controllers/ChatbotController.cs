@@ -34,5 +34,30 @@ namespace SeniorProj.Controllers
             string temp = new ControlFlow().askQuestion(question);
             return temp;
         }
+
+        [HttpGet, Route("GetAll")]
+        public IEnumerable<Answer> GetAll()
+        {
+
+            List<string> state = new List<string>();
+
+            state.Add("How many students are enrolled?");
+            state.Add("The number of students enrolled at Rose-Hulman in the year 2020 is 2038.");
+            
+            state.Add("What does IRPA stand for?");
+            state.Add("IRPA stands for Institutional Research Planning and Assessment.");
+            
+            state.Add("What qualifies an undergraduate for part time status?");
+            state.Add("Undergraduates that have fewer than 12 credit hours per quarter or fewer than 24 contact hours per quarter are considered part time.");
+            
+            state.Add("What qualifies a graduate for part time status?");
+            state.Add("Graduates that are enrolled for fewer than 9 credit hours per quarter are considered part time.");
+
+            return Enumerable.Range(0, 4).Select(index => new Answer 
+            {
+                answer = state.ElementAt(index*2+1),
+                question = state.ElementAt(index*2)
+            }).ToArray();
+        }
     }
 }
