@@ -110,10 +110,10 @@ namespace Chatbot
                     //read ansString
                     MySqlCommand myCommand = new MySqlCommand(selectAnsStringQuery, connect);
                     myReader = myCommand.ExecuteReader();
-                    string ansString = "";
+                    List<string> ansString = new List<string>();
                     while (myReader.Read())
                     {
-                        ansString += myReader.GetString(0);
+                        ansString.Add(myReader.GetString(0));
                     }
                     Console.WriteLine(ansString);
                     myReader.Close();
@@ -121,10 +121,10 @@ namespace Chatbot
                     //read ansID
                     myCommand = new MySqlCommand(selectAnsIDQuery, connect);
                     myReader = myCommand.ExecuteReader();
-                    string ansID = "";
+                    List<string> ansID = new List<string>();
                     while (myReader.Read())
                     {
-                        ansID += myReader.GetString(0);
+                        ansID.Add(myReader.GetString(0));
                     }
                     Console.WriteLine(ansID);
                     myReader.Close();
@@ -132,16 +132,21 @@ namespace Chatbot
                     //read question
                     myCommand = new MySqlCommand(selectQuestionQuery, connect);
                     myReader = myCommand.ExecuteReader();
-                    string question = "";
+                    List<string> question = new List<string>();
                     while (myReader.Read())
                     {
-                        question += myReader.GetString(0);
+                        question.Add(myReader.GetString(0));
                     }
                     Console.WriteLine(question);
 
                     myReader.Close();
-                    Answer ans = new Answer(ansID, question, ansString);
-                    output.Add(ans);
+
+                    Answer ans;
+
+                    for(int i = 0; i < ansString.Count; i++){ 
+                        ans = new Answer(ansID[i], question[i], ansString[i]);
+                        output.Add(ans);
+                    }
                     
 
                 }
