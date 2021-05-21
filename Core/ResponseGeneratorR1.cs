@@ -8,9 +8,14 @@ namespace Chatbot
     {
         public List<string> generateResponse(List<Answer> answers){
             var hold = new List<string>();
+
+			
             double hold2 = -1;
             double hold3 = -1;
             int count = 0;
+			
+
+			/*
 			
 			//Sort the list so that the most relevent answers are first
 			Sort(answers, 0, answers.Count);
@@ -47,8 +52,10 @@ namespace Chatbot
 			//Return if only one answer was deemed valid
 			hold.Add(answers[0].answer);
 			return hold;
+
+			*/
 			
-			/*
+			
             foreach (Answer keep in answers){
                 if(keep.relevency > hold3){
                     hold3 = keep.relevency;
@@ -63,7 +70,7 @@ namespace Chatbot
             hold.Add(answers[(int)hold2].answer);
             return hold;
 			
-			*/
+			
         }
 		
 		//Mergesort implementation originally written by Princi Singh, modified to work with answers
