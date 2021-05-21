@@ -14,7 +14,7 @@ namespace Chatbot
         }
         
         public void connection(){
-            string myConnectString = "server=137.112.237.224; port=3300;Database=body;uid=root;pwd=test;";
+            string myConnectString = "server=137.112.232.187; port=3300;Database=body;uid=root;pwd=test;";
             connect.ConnectionString = myConnectString;
             try
             {
