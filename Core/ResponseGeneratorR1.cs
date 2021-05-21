@@ -13,24 +13,24 @@ namespace Chatbot
             int count = 0;
 			
 			//Sort the list so that the most relevent answers are first
-			Merge(answers, 0, answers.count);
+			Sort(answers, 0, answers.Count);
 			
 			
 			//If no answer had a score above 30, then no answer is determined as valid
-			if(answers[0].relevancy < 30){
+			if(answers[0].relevency < 30){
 				hold.Add("No valid response detected");
 			}
 			
 			
 			//If there are two or more answers
-			if(answers.count <= 2){
+			if(answers.Count <= 2){
 				double first = answers[0].relevency;
 				double second = answers[1].relevency;
 				//Check if the top 2 answers have a score within 8% of each other
 				double percentDiff = ((first - second) / ((first + second) / 2)) * 100;
-				if(diff < 8){
+				if(percentDiff < 8){
 					hold.Add("Multiple potential responses:");
-					for(int i = 0; i < answers.count; i++){
+					for(int i = 0; i < answers.Count; i++){
 						//Add all answers with a score within 8% to the list of answers
 						double temp = answers[i].relevency;
 						double diff = ((first - temp) / ((first + temp) / 2)) * 100;
@@ -68,7 +68,7 @@ namespace Chatbot
 		
 		//Mergesort implementation originally written by Princi Singh, modified to work with answers
 		
-		public List<Answer> Merge(List<Answer> answers, int l, int m, int r){
+		public void Merge(List<Answer> answers, int l, int m, int r){
 		
 			int n1 = m - l + 1;
         	int n2 = r - m;
@@ -87,7 +87,7 @@ namespace Chatbot
 			
 			int k = l;
         	while (i < n1 && j < n2) {
-            	if (L[i].relevancy >= R[j].relevency) {
+            	if (L[i].relevency >= R[j].relevency) {
                 	answers[k] = L[i];
                 	i++;
             	}
@@ -121,7 +121,7 @@ namespace Chatbot
             	Sort(answers, l, m);
             	Sort(answers, m + 1, r);
  
-            	Merge(arr, l, m, r);
+            	Merge(answers, l, m, r);
         	}
 		}
 		
