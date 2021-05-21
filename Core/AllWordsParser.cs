@@ -18,7 +18,7 @@ namespace Chatbot
                 }
             }
 
-            string newQuestion = temp.ToString();
+            string newQuestion = new string(temp);
 
             List<string> words = new List<string>(newQuestion.Split(' '));
             EnglishSmartStopWordFilter ssf = new EnglishSmartStopWordFilter();
