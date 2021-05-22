@@ -12,6 +12,7 @@ namespace Chatbot
 
         public Answer()
         {
+            keywords = new Dictionary<string, double>();
         }
 
         public Answer(string ansID, string question, string ansString)
@@ -19,6 +20,7 @@ namespace Chatbot
             this.ID = ansID;
             this.question = question;
             this.answer = ansString;
+            keywords = new Dictionary<string, double>();
         }
 
         //retrieved from database
