@@ -14,7 +14,7 @@ namespace Chatbot
         }
         
         public void connection(){
-            string myConnectString = "server=137.112.232.187; port=3300;Database=body;uid=root;pwd=test;";
+            string myConnectString = "server=137.112.237.187; port=3300;Database=body;uid=root;pwd=test;";
             connect.ConnectionString = myConnectString;
             try
             {
@@ -96,12 +96,12 @@ namespace Chatbot
                 foreach (String keyword in keywords)
                 {
                     String selectAnsStringQuery = "SELECT Answer FROM answers WHERE ID " +
-                        "= (SELECT AnswerID FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
+                        "IN (SELECT AnswerID FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
                         " Keyword = '" + keyword + "')); ";
                     String selectAnsIDQuery = "SELECT AnswerID FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
                         " Keyword = '" + keyword + "'); ";
                     String selectQuestionQuery = "SELECT Question FROM answers WHERE ID " +
-                        "= (SELECT AnswerID FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
+                        "IN (SELECT AnswerID FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
                         " Keyword = '" + keyword + "')); ";
                     
                     
@@ -110,10 +110,10 @@ namespace Chatbot
                     //read ansString
                     MySqlCommand myCommand = new MySqlCommand(selectAnsStringQuery, connect);
                     myReader = myCommand.ExecuteReader();
-                    string ansString = "";
+                    List<string> ansString = new List<string>();
                     while (myReader.Read())
                     {
-                        ansString += myReader.GetString(0);
+                        ansString.Add(myReader.GetString(0));
                     }
                     Console.WriteLine(ansString);
                     myReader.Close();
@@ -121,10 +121,10 @@ namespace Chatbot
                     //read ansID
                     myCommand = new MySqlCommand(selectAnsIDQuery, connect);
                     myReader = myCommand.ExecuteReader();
-                    string ansID = "";
+                    List<string> ansID = new List<string>();
                     while (myReader.Read())
                     {
-                        ansID += myReader.GetString(0);
+                        ansID.Add(myReader.GetString(0));
                     }
                     Console.WriteLine(ansID);
                     myReader.Close();
@@ -132,22 +132,118 @@ namespace Chatbot
                     //read question
                     myCommand = new MySqlCommand(selectQuestionQuery, connect);
                     myReader = myCommand.ExecuteReader();
-                    string question = "";
+                    List<string> question = new List<string>();
                     while (myReader.Read())
                     {
-                        question += myReader.GetString(0);
+                        question.Add(myReader.GetString(0));
                     }
                     Console.WriteLine(question);
 
                     myReader.Close();
-                    Answer ans = new Answer(ansID, question, ansString);
-                    output.Add(ans);
+
+                    Answer ans;
+
+                    for(int i = 0; i < ansString.Count; i++){ 
+                        ans = new Answer(ansID[i], question[i], ansString[i]);
+                        output.Add(ans);
+                    }
                     
 
                 }
                 connect.Close();
                 return output;
                
+
+            }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return null;
+        }
+        List <Answer> TotalOutput()
+        {
+            List<Answer> output = new List<Answer>();
+            try
+            {
+                connection();
+
+                String selectAllKeywords = "Select * keyword From keywords";
+
+                MySqlDataReader holdReader;
+
+                //read ansString
+                MySqlCommand holdCommand = new MySqlCommand(selectAllKeywords, connect);
+                holdReader = holdCommand.ExecuteReader();
+                List<string> keywords = new List<string>();
+                while (holdReader.Read())
+                {
+                    keywords.Add(holdReader.GetString(0));
+                }
+                Console.WriteLine(keywords);
+                holdReader.Close();
+
+                foreach (String keyword in keywords)
+                {
+                    String selectAnsStringQuery = "SELECT Answer FROM answers WHERE ID " +
+                        "IN (SELECT AnswerID FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
+                        " Keyword = '" + keyword + "')); ";
+                    String selectAnsIDQuery = "SELECT AnswerID FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
+                        " Keyword = '" + keyword + "'); ";
+                    String selectQuestionQuery = "SELECT Question FROM answers WHERE ID " +
+                        "IN (SELECT AnswerID FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
+                        " Keyword = '" + keyword + "')); ";
+
+
+                    MySqlDataReader myReader;
+
+                    //read ansString
+                    MySqlCommand myCommand = new MySqlCommand(selectAnsStringQuery, connect);
+                    myReader = myCommand.ExecuteReader();
+                    List<string> ansString = new List<string>();
+                    while (myReader.Read())
+                    {
+                        ansString.Add(myReader.GetString(0));
+                    }
+                    Console.WriteLine(ansString);
+                    myReader.Close();
+
+                    //read ansID
+                    myCommand = new MySqlCommand(selectAnsIDQuery, connect);
+                    myReader = myCommand.ExecuteReader();
+                    List<string> ansID = new List<string>();
+                    while (myReader.Read())
+                    {
+                        ansID.Add(myReader.GetString(0));
+                    }
+                    Console.WriteLine(ansID);
+                    myReader.Close();
+
+                    //read question
+                    myCommand = new MySqlCommand(selectQuestionQuery, connect);
+                    myReader = myCommand.ExecuteReader();
+                    List<string> question = new List<string>();
+                    while (myReader.Read())
+                    {
+                        question.Add(myReader.GetString(0));
+                    }
+                    Console.WriteLine(question);
+
+                    myReader.Close();
+
+                    Answer ans;
+
+                    for (int i = 0; i < ansString.Count; i++)
+                    {
+                        ans = new Answer(ansID[i], question[i], ansString[i]);
+                        output.Add(ans);
+                    }
+
+
+                }
+                connect.Close();
+                return output;
+
 
             }
             catch (MySql.Data.MySqlClient.MySqlException ex)
