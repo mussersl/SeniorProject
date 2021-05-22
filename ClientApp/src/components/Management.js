@@ -7,7 +7,7 @@ export class Management extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { count: 0, questions: [], answers: [], ids: [], edit: -1, adding: 0, loading: 0, verified: "Loading" };
+        this.state = { count: 0, questions: [], answers: [], ids: [], edit: -1, adding: 0, loading: 0, verified: "Loading", got: 0 };
     }
 
     async fetchVerification() {
@@ -37,7 +37,8 @@ export class Management extends Component {
             this.setState({ loading: 0 });
             this.setState({
                 edit: -1,
-                adding: 0
+                adding: 0,
+                got: 0
             });
             return;
         }
@@ -54,7 +55,8 @@ export class Management extends Component {
             answers: this.state.answers,
             edit: this.state.count,
             count: this.state.count + 1,
-            adding: 1
+            adding: 1,
+            got: 0
         });
     }
 
@@ -78,22 +80,27 @@ export class Management extends Component {
                 answers: this.state.answers,
                 count: this.state.count - 1,
                 edit: -1,
-                adding: 0
+                adding: 0,
+                got: 0
             });
             return;
         }
     }
 
     async getanswers() {
+        if (this.state.got != 0) {
+            return;
+        }
         const result = await fetch('ChatBot/GetAll');
         const response = await result.json();
+        console.log("Answers Fetched");
         this.state.questions = [];
         this.state.answers = [];
         this.state.count = 0;
         for (let i = 0; i < response.length; i = i + 1) {
             this.state.questions.push(response[i].question);
             this.state.answers.push(response[i].answer);
-            //this.state.ids.push(response[i].ID);
+            this.state.ids.push(response[i].ID);
             this.state.count++;
         }
         if (this.state.adding == 1) {
@@ -102,13 +109,17 @@ export class Management extends Component {
         this.setState({
             questions: this.state.questions,
             answers: this.state.answers,
-            count: this.state.count
+            count: this.state.count,
+            got: 1
         });
     }
 
     renderAnswers() {
         this.getanswers();
         let uitems = []
+        if (this.state.got == 0) {
+            uitems.push(<div>Fetching answers from database</div>);
+        }
         let i = 0;
         while (i < this.state.count) {
             if (i == this.state.edit) {
@@ -156,8 +167,8 @@ export class Management extends Component {
 
 
     render() {
-        this.fetchVerification();
         if (this.state.verified == "Loading") {
+            this.fetchVerification();
             return (<div>Loading. Please wait.</div>);
         }
         if (this.state.verified != "VerifiedCertificate") {
