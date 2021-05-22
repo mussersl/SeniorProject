@@ -10,7 +10,7 @@ namespace Chatbot
         {
             char[] temp = question.ToLower().ToCharArray();
 
-            for(int i = 0; i<temp.Length, i++)
+            for(int i = 0; i<temp.Length; i++)
             {
                 if (!char.IsLetterOrDigit(temp[i]))
                 {
