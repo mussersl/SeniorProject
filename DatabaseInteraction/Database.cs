@@ -106,7 +106,7 @@ namespace Chatbot
                         "IN (SELECT AnswerID FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
                         " Keyword = '" + keyword + "')); ";
                     String valueQuery = "SELECT SUM(Relevance) FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
-                        " Keyword = '" + keyword + "') AND AnswerID = (SELECT AnswerID FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
+                        " Keyword = '" + keyword + "') AND AnswerID IN (SELECT AnswerID FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
                         " Keyword = '" + keyword + "')); ";
 
                     MySqlDataReader myReader;
