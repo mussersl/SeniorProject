@@ -15,8 +15,6 @@ namespace SeniorProj.Controllers
     {
         private readonly ILogger<ChatbotController> _logger;
 
-        private string question = "";
-
         public ChatbotController(ILogger<ChatbotController> logger)
         {
             _logger = logger;
@@ -51,28 +49,15 @@ namespace SeniorProj.Controllers
         public IEnumerable<Answer> GetAll()
         {
 
-            //List<string> state = new List<string>();
-
-            //state.Add("How many students are enrolled?");
-            //state.Add("The number of students enrolled at Rose-Hulman in the year 2020 is 2038.");
-
-            //state.Add("What does IRPA stand for?");
-            //state.Add("IRPA stands for Institutional Research Planning and Assessment.");
-
-            //state.Add("What qualifies an undergraduate for part time status?");
-            //state.Add("Undergraduates that have fewer than 12 credit hours per quarter or fewer than 24 contact hours per quarter are considered part time.");
-
-            //state.Add("What qualifies a graduate for part time status?");
-            //state.Add("Graduates that are enrolled for fewer than 9 credit hours per quarter are considered part time.");
-
-            //return Enumerable.Range(0, 4).Select(index => new Answer 
-            //{
-            //    answer = state.ElementAt(index*2+1),
-            //    question = state.ElementAt(index*2)
-            //}).ToArray();
-
             Database db = new Database();
-            return db.TotalOutput();
+            List<Answer> output = db.TotalOutput();
+            Console.WriteLine("THIS IS THE NUM OF ANS " + output.Count);
+            foreach(Answer a in output)
+            {
+                a.printToConsole();
+                Console.WriteLine("THIS SHOULD BE A REPEAT OF THE ID: " + a.ID);
+            }
+            return Enumerable.Range(0, output.Count).Select(index => output[index]).ToArray();
         }
 
         [HttpGet, Route("Login/{username}/{password}")]

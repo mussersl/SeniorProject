@@ -161,85 +161,65 @@ namespace Chatbot
             }
             return null;
         }
-        public List <Answer> TotalOutput()
+        public List<Answer> TotalOutput()
         {
-            List<Answer> output = new List<Answer>();
             try
             {
                 connection();
 
-                String selectAllKeywords = "SELECT keyword FROM keywords";
+                String selectAllAnswersIDs = "SELECT ID FROM answers";
 
                 MySqlDataReader holdReader;
 
                 //read ansString
-                MySqlCommand holdCommand = new MySqlCommand(selectAllKeywords, connect);
+                MySqlCommand holdCommand = new MySqlCommand(selectAllAnswersIDs, connect);
                 holdReader = holdCommand.ExecuteReader();
-                List<string> keywords = new List<string>();
+                List<string> ansIDs = new List<string>();
+                List<string> ansString = new List<string>();
+                List<string> question = new List<string>();
                 while (holdReader.Read())
                 {
-                    keywords.Add(holdReader.GetString(0));
+                    ansIDs.Add(holdReader.GetString(0));
                 }
-                Console.WriteLine(keywords);
                 holdReader.Close();
 
-                foreach (String keyword in keywords)
+                foreach (String id in ansIDs)
                 {
-                    String selectAnsStringQuery = "SELECT Answer FROM answers WHERE ID " +
-                        "IN (SELECT AnswerID FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
-                        " Keyword = '" + keyword + "')); ";
-                    String selectAnsIDQuery = "SELECT AnswerID FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
-                        " Keyword = '" + keyword + "'); ";
-                    String selectQuestionQuery = "SELECT Question FROM answers WHERE ID " +
-                        "IN (SELECT AnswerID FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
-                        " Keyword = '" + keyword + "')); ";
+                    String selectQuestionQuery = "SELECT Question FROM answers WHERE ID ='" + id + "';";
+                    String selectAnswerQuery = "SELECT Answer FROM answers WHERE ID ='" + id + "';";
 
 
                     MySqlDataReader myReader;
 
-                    //read ansString
-                    MySqlCommand myCommand = new MySqlCommand(selectAnsStringQuery, connect);
+                    //read question
+                    MySqlCommand myCommand = new MySqlCommand(selectAnswerQuery, connect);
                     myReader = myCommand.ExecuteReader();
-                    List<string> ansString = new List<string>();
-                    while (myReader.Read())
+                    if (myReader.Read())
                     {
                         ansString.Add(myReader.GetString(0));
-                    }
-                    myReader.Close();
-
-                    //read ansID
-                    myCommand = new MySqlCommand(selectAnsIDQuery, connect);
-                    myReader = myCommand.ExecuteReader();
-                    List<string> ansID = new List<string>();
-                    while (myReader.Read())
-                    {
-                        ansID.Add(myReader.GetString(0));
                     }
                     myReader.Close();
 
                     //read question
                     myCommand = new MySqlCommand(selectQuestionQuery, connect);
                     myReader = myCommand.ExecuteReader();
-                    List<string> question = new List<string>();
-                    while (myReader.Read())
+                    if (myReader.Read())
                     {
                         question.Add(myReader.GetString(0));
                     }
 
                     myReader.Close();
 
-                    Answer ans;
-
-                    for (int i = 0; i < ansString.Count; i++)
-                    {
-                        ans = new Answer(ansID[i], question[i], ansString[i]);
-                        Console.WriteLine(ans.ansString);
-                        output.Add(ans);
-                    }
-
-
                 }
                 connect.Close();
+
+                Answer ans;
+                List<Answer> output = new List<Answer>();
+                for (int i = 0; i < ansString.Count; i++)
+                {
+                    ans = new Answer(ansIDs[i], question[i], ansString[i]);
+                    output.Add(ans);
+                }
                 return output;
 
 

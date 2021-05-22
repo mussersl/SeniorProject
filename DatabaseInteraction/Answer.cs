@@ -16,9 +16,9 @@ namespace Chatbot
 
         public Answer(string ansID, string question, string ansString)
         {
-            this.answerID = ansID;
-            this.questionString = question;
-            this.ansString = ansString;
+            this.ID = ansID;
+            this.question = question;
+            this.answer = ansString;
         }
 
         //retrieved from database
@@ -32,9 +32,9 @@ namespace Chatbot
 
         public void printToConsole()
         {
-            Console.WriteLine("AnswerID: " + answerID);
-            Console.WriteLine("Answer: " + ansString);
-            Console.WriteLine("Question: " + questionString);
+            Console.WriteLine("AnswerID: " + ID);
+            Console.WriteLine("Answer: " + answer);
+            Console.WriteLine("Question: " + question);
         }
     }
 }
