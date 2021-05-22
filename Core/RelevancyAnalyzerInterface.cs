@@ -6,7 +6,7 @@ namespace Chatbot
 {
     public interface RelevancyAnalyzerInterface
     {
-        Answer assignRelevencyOf(Answer ans, List<string> keywords, List<string> recentKeywords);
+        Answer assignRelevencyOf(Answer ans, List<string> keywords);
         void sortAnswers(List<Answer> answers);
     }
 }

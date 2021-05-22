@@ -7,7 +7,7 @@ namespace Chatbot
 {
     public class RelevancyAnalyzer : RelevancyAnalyzerInterface 
     {
-        public Answer assignRelevencyOf(Answer ans, List<string> keywords, List<string> recentKeywords) 
+        public Answer assignRelevencyOf(Answer ans, List<string> keywords) 
         {
             double total = 0;
             foreach(string key in keywords)

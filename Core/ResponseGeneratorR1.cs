@@ -29,20 +29,25 @@ namespace Chatbot
             return hold;
 			*/
 
-			
+
 
 			//Sort the list so that the most relevent answers are first
-			Sort(answers, 0, answers.Count);
-			
-			
+			answers.Sort((Answer a, Answer b) => { return a.relevency.CompareTo(b.relevency); });
+
+			if(answers.Count == 0)
+            {
+				hold.Add("Something's wrong");
+				return hold;
+            }
+
 			//If no answer had a score above 30, then no answer is determined as valid
-			if(answers[0].relevency < 30){
+			if (answers[0].relevency < 30){
 				hold.Add("No valid response detected");
 			}
 			
 			
 			//If there are two or more answers
-			if(answers.Count <= 2){
+			if(answers.Count >= 2){
 				double first = answers[0].relevency;
 				double second = answers[1].relevency;
 				//Check if the top 2 answers have a score within 8% of each other

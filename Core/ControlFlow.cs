@@ -8,12 +8,16 @@ namespace Chatbot
     {
         private KeywordParserInterface wordParser;
         private DatabaseQueryInterface db;
+        private ResponseGeneratorInterface rg;
+        private RelevancyAnalyzerInterface ra;
 
         //Constructor
         public ControlFlow()
         {
             this.wordParser = new AllWordsParser(); 
             this.db = new Database();
+            this.rg = new ResponseGeneratorR1();
+            this.ra = new RelevancyAnalyzer();
             //DatabaseEditor dbEditor = new Database();
             List<String> keywords = new List<string>();
         }
@@ -26,17 +30,20 @@ namespace Chatbot
             {
                 return "I'm sorry. I can't answer your question right now.";
             }
-            else if (answers.Count == 0)
-            {
-                return "I'm sorry. I don't understand the question.";
-            }
             else
             {
-                foreach(Answer a in answers)
+                for(int i = 0; i < answers.Count; i++)
                 {
-                    a.printToConsole();
+                    ra.assignRelevencyOf(answers[i], questionKeywords);
                 }
-                return answers[0].ansString;
+                List<string> responses = rg.generateResponse(answers);
+                string finalResponse = "";
+                for(int i = 0; i < responses.Count; i++)
+                {
+                    finalResponse += responses[i];
+                    finalResponse += '\n';
+                }
+                return finalResponse;
             }
         }
 
