@@ -1,12 +1,21 @@
 import { Button } from 'bootstrap';
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 export class Management extends Component {
     static displayName = Management.name;
 
     constructor(props) {
         super(props);
-        this.state = {count: 0, questions: [], answers: [], ids: [], edit: -1, adding: 0, loading: 0 };
+        this.state = { count: 0, questions: [], answers: [], ids: [], edit: -1, adding: 0, loading: 0, verified: "Loading" };
+    }
+
+    async fetchVerification() {
+        let certificate = sessionStorage.getItem("verificationIRPAChatbot");
+        const result = await fetch('ChatBot/VerifyLogin/' + certificate);
+        const response = await result.text();
+        this.setState({ verified: response });
+        return;
     }
 
     edit(i) {
@@ -146,7 +155,14 @@ export class Management extends Component {
     }
 
 
-  render () {
+    render() {
+        this.fetchVerification();
+        if (this.state.verified == "Loading") {
+            return (<div>Loading. Please wait.</div>);
+        }
+        if (this.state.verified != "VerifiedCertificate") {
+            return (<Redirect to='/Login' />);
+        }
       return (
           <div id="mainPage" class="container page-container">
               <div class="row">

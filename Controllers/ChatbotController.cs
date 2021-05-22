@@ -71,5 +71,24 @@ namespace SeniorProj.Controllers
                 question = state.ElementAt(index*2)
             }).ToArray();
         }
+
+        [HttpGet, Route("Login/{username}/{password}")]
+        public string Login(string username, string password)
+        {
+            return "jfjrisduhi4858tru544hgiriu9wt45hgr59u4y8gwwhtiw";
+        }
+
+        [HttpGet, Route("VerifyLogin/{password}")]
+        public string VerifyLogin(string password)
+        {
+            if (password == "jfjrisduhi4858tru544hgiriu9wt45hgr59u4y8gwwhtiw")
+            {
+                return "VerifiedCertificate";
+            }
+            else
+            {
+                return "No";
+            }
+        }
     }
 }
