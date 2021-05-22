@@ -35,6 +35,18 @@ namespace SeniorProj.Controllers
             return temp;
         }
 
+        [HttpPost, Route("Edit/{id}/{question}/{answer}")]
+        public bool Edit(string id, string question, string answer)
+        {
+            return false;
+        }
+
+        [HttpPost, Route("Delete/{id}")]
+        public bool Delete(string id)
+        {
+            return false;
+        }
+
         [HttpGet, Route("GetAll")]
         public IEnumerable<Answer> GetAll()
         {

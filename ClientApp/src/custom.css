@@ -3,6 +3,11 @@ body {
     background: #DDDDDD;
 }
 
+.editBox {
+    width: 100%;
+    height: 100%;
+}
+
 .navbar {
     background-color: #800000;
     color: white;
@@ -52,6 +57,11 @@ a.navbar-brand {
 .btn:active {
     background-color: #600000 !important;
     border-color: #600000 !important;
+}
+
+.btn:disabled {
+    background-color: #400000 !important;
+    border-color: #400000 !important;
 }
 
 .btn:visited {
@@ -106,4 +116,8 @@ a.navbar-brand {
 
 #addAnswer {
     margin-bottom: 5px;
+}
+
+#bot {
+    min-width: 400px !important;
 }
