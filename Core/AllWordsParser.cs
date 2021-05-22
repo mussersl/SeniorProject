@@ -9,17 +9,17 @@ namespace Chatbot
         public List<string> parseQuestion(string question)
         {
             char[] temp = question.ToLower().ToCharArray();
-
             for(int i = 0; i<temp.Length; i++)
             {
                 if (!char.IsLetterOrDigit(temp[i]))
                 {
+                    Console.WriteLine(temp[i]);
                     temp[i] = ' ';
                 }
             }
 
             string newQuestion = new string(temp);
-
+ 
             List<string> words = new List<string>(newQuestion.Split(' '));
             EnglishSmartStopWordFilter ssf = new EnglishSmartStopWordFilter();
             List<string> keywords = new List<string>();
