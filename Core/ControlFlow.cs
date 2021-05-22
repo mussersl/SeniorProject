@@ -32,10 +32,12 @@ namespace Chatbot
             }
             else
             {
+                
                 for(int i = 0; i < answers.Count; i++)
                 {
                     ra.assignRelevencyOf(answers[i], questionKeywords);
                 }
+                
                 List<string> responses = rg.generateResponse(answers);
                 string finalResponse = "";
                 for(int i = 0; i < responses.Count; i++)
