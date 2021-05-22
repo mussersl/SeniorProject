@@ -105,9 +105,9 @@ namespace Chatbot
                     String selectQuestionQuery = "SELECT Question FROM answers WHERE ID " +
                         "IN (SELECT AnswerID FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
                         " Keyword = '" + keyword + "')); ";
-                    String valueQuery = "SELECT SUM(Relevance) FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
+                    String valueQuery = "SELECT SUM(Relevance) AS Relevance FROM (keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
                         " Keyword = '" + keyword + "') AND AnswerID IN (SELECT AnswerID FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
-                        " Keyword = '" + keyword + "')); ";
+                        " Keyword = '" + keyword + "'))); ";
 
                     MySqlDataReader myReader;
 
@@ -126,9 +126,10 @@ namespace Chatbot
                     MySqlCommand values = new MySqlCommand(valueQuery, connect);
                     myReader = values.ExecuteReader();
                     List<double> allValues = new List<double>();
-                    while (myReader.Read())
+                    if (myReader.HasRows)
                     {
-                        allValues.Add(myReader.GetInt32(0));
+                        myReader.Read();
+                        allValues.Add(Convert.ToDouble(myReader["Relevance"]));
                     }
                     Console.WriteLine(allValues);
                     myReader.Close();
@@ -185,7 +186,7 @@ namespace Chatbot
             {
                 connection();
 
-                String selectAllKeywords = "Select * keyword From keywords";
+                String selectAllKeywords = "SELECT * keyword FROM keywords";
 
                 MySqlDataReader holdReader;
 
