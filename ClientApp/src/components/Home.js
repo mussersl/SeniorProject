@@ -6,10 +6,9 @@ export class Home extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { chatList: [], count: 0, dumbLearning: 0 };
+        this.state = { chatList: [], count: 0};
         this.askButton = this.askButton.bind(this);
         this.renderlog = this.renderlog.bind(this);
-        this.chatBotAskQuestion = this.chatBotAskQuestion.bind(this);
     }
 
     async componentDidMount() {
@@ -61,23 +60,6 @@ export class Home extends Component {
         this.render();
     }
 
-    chatBotAskQuestion(question) {
-        if (question == "What does IRPA stand for?")
-            return "IRPA stands for Institutional Research Planning and Assessment.";
-        else if (question.includes("enroll"))
-            return "The number of students enrolled at Rose-Hulman in the year 2020 is 2038.";
-        else if (question.includes("graduate") && this.state.dumbLearning == 0)
-            return "Undergraduates that have fewer than 12 credit hours per quarter or fewer than 24 contact hours per quarter are considered part time.";
-        else if (question.includes("graduate") && this.state.dumbLearning == 1)
-            return "Graduates that are enrolled for fewer than 9 credit hours per quarter are considered part time.";
-        else if (question.includes("wrong")) {
-            this.state.dumbLearning = 1;
-            return "Thank you for your feedback. Is this what you are looking for?\n\nGraduates that are enrolled for fewer than 9 credit hours per quarter are considered part time.";
-        }
-        else
-            return "My apologies, I don't understand the question.";
-    }
-
     renderlog() {
         let uitems = [];
         let index = 0;
@@ -114,7 +96,7 @@ export class Home extends Component {
           <div id="mainPage" class="container page-container">
 
               <div class="row justify-content-center">
-                  <div class="col-4">
+                  <div id="bot" class="col-4">
                       <div id="chatlog-window">
                           <div class="row">
                               <div id="chatlog" class="col">
