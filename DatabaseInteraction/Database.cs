@@ -12,8 +12,9 @@ namespace Chatbot
         {
             connect = new MySql.Data.MySqlClient.MySqlConnection();
         }
-        
-        public void connection(){
+
+        public void connection()
+        {
             string myConnectString = "server=137.112.237.187; port=3300;Database=body;uid=root;pwd=test;";
             connect.ConnectionString = myConnectString;
             try
@@ -21,8 +22,9 @@ namespace Chatbot
                 connect.Open();
                 Console.WriteLine("MariaDB connected: " + myConnectString);
             }
-            catch(MySql.Data.MySqlClient.MySqlException ex){
-                Console.WriteLine("Error received: "+ex);
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                Console.WriteLine("Error received: " + ex);
             }
         }
 
@@ -33,7 +35,7 @@ namespace Chatbot
             {
                 connection();
                 String SQLQuery = "INSERT INTO answers VALUES(@name1, @name2, @name3); ";
-                
+
                 MySqlCommand myCommand = new MySqlCommand(SQLQuery, connect);
                 myCommand.Parameters.AddWithValue("name1", ans.answerID);
                 myCommand.Parameters.AddWithValue("name2", ans.questionString);
@@ -103,10 +105,12 @@ namespace Chatbot
                     String selectQuestionQuery = "SELECT Question FROM answers WHERE ID " +
                         "IN (SELECT AnswerID FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
                         " Keyword = '" + keyword + "')); ";
-                    
-                    
+                    String valueQuery = "SELECT SUM(Relevance) FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keyords WHERE" +
+                        " Keyword = '" + keyword + "') AND AnswerID = (SELECT AnswerID FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
+                        " Keyword = '" + keyword + "')); ";
+
                     MySqlDataReader myReader;
-                    
+
                     //read ansString
                     MySqlCommand myCommand = new MySqlCommand(selectAnsStringQuery, connect);
                     myReader = myCommand.ExecuteReader();
@@ -116,6 +120,17 @@ namespace Chatbot
                         ansString.Add(myReader.GetString(0));
                     }
                     Console.WriteLine(ansString);
+                    myReader.Close();
+
+
+                    MySqlCommand values = new MySqlCommand(valueQuery, connect);
+                    myReader = values.ExecuteReader();
+                    List<double> allValues = new List<double>();
+                    while (myReader.Read())
+                    {
+                        allValues.Add(myReader.GetInt32(0));
+                    }
+                    Console.WriteLine(allValues);
                     myReader.Close();
 
                     //read ansID
@@ -143,16 +158,18 @@ namespace Chatbot
 
                     Answer ans;
 
-                    for(int i = 0; i < ansString.Count; i++){ 
+                    for (int i = 0; i < ansString.Count; i++)
+                    {
                         ans = new Answer(ansID[i], question[i], ansString[i]);
+                        ans.relevency = allValues[i];
                         output.Add(ans);
                     }
-                    
+
 
                 }
                 connect.Close();
                 return output;
-               
+
 
             }
             catch (MySql.Data.MySqlClient.MySqlException ex)
@@ -161,7 +178,7 @@ namespace Chatbot
             }
             return null;
         }
-        List <Answer> TotalOutput()
+        List<Answer> TotalOutput()
         {
             List<Answer> output = new List<Answer>();
             try
@@ -255,4 +272,3 @@ namespace Chatbot
     }
 }
 
-        
