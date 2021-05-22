@@ -43,6 +43,7 @@ namespace Chatbot
 			//If no answer had a score above 30, then no answer is determined as valid
 			if (answers[0].relevency < 30){
 				hold.Add("No valid response detected");
+				return hold;
 			}
 			
 			
