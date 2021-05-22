@@ -12,9 +12,8 @@ namespace Chatbot
         {
             connect = new MySql.Data.MySqlClient.MySqlConnection();
         }
-
-        public void connection()
-        {
+        
+        public void connection(){
             string myConnectString = "server=137.112.237.187; port=3300;Database=body;uid=root;pwd=test;";
             connect.ConnectionString = myConnectString;
             try
@@ -22,9 +21,8 @@ namespace Chatbot
                 connect.Open();
                 Console.WriteLine("MariaDB connected: " + myConnectString);
             }
-            catch (MySql.Data.MySqlClient.MySqlException ex)
-            {
-                Console.WriteLine("Error received: " + ex);
+            catch(MySql.Data.MySqlClient.MySqlException ex){
+                Console.WriteLine("Error received: "+ex);
             }
         }
 
@@ -35,7 +33,7 @@ namespace Chatbot
             {
                 connection();
                 String SQLQuery = "INSERT INTO answers VALUES(@name1, @name2, @name3); ";
-
+                
                 MySqlCommand myCommand = new MySqlCommand(SQLQuery, connect);
                 myCommand.Parameters.AddWithValue("name1", ans.answerID);
                 myCommand.Parameters.AddWithValue("name2", ans.questionString);
@@ -90,85 +88,89 @@ namespace Chatbot
 
         List<Answer> DatabaseQueryInterface.queryDatabaseOnKeywords(List<string> keywords)
         {
-            List<Answer> output = new List<Answer>();
             try
             {
                 connection();
-
-                foreach (String keyword in keywords)
+                Dictionary<string, Answer> answers = new Dictionary<string, Answer>();
+                foreach (string keyword in keywords)
                 {
-                    String selectAnsStringQuery = "SELECT Answer FROM answers WHERE ID " +
-                        "IN (SELECT AnswerID FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
-                        " Keyword = '" + keyword + "')); ";
-                    String selectAnsIDQuery = "SELECT AnswerID FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
-                        " Keyword = '" + keyword + "'); ";
-                    String selectQuestionQuery = "SELECT Question FROM answers WHERE ID " +
-                        "IN (SELECT AnswerID FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
-                        " Keyword = '" + keyword + "')); ";
-                    String valueQuery = "SELECT SUM(Relevance) FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keyords WHERE" + 
-                        " Keyword = '" + keyword + "') AND AnswerID = (SELECT AnswerID FROM keyword_relevancy WHERE KeywordID = (SELECT ID FROM keywords WHERE" +
-                        " Keyword = '" + keyword + "')); ";
-                    
+                    string selectKeywordId = "SELECT ID FROM keywords WHERE Keyword = '" + keyword + "';";
+                                        
                     MySqlDataReader myReader;
-
-                    //read ansString
-                    MySqlCommand myCommand = new MySqlCommand(selectAnsStringQuery, connect);
+                    
+                    //Find ID
+                    MySqlCommand myCommand = new MySqlCommand(selectKeywordId, connect);
                     myReader = myCommand.ExecuteReader();
-                    List<string> ansString = new List<string>();
-                    while (myReader.Read())
+                    string id = "-1";
+                    if (myReader.Read())
                     {
-                        ansString.Add(myReader.GetString(0));
+                        id = myReader.GetString(0);
                     }
-                    Console.WriteLine(ansString);
                     myReader.Close();
 
+                    string getAnswerIdsQuery = "SELECT AnswerID FROM keyword_relevancy WHERE KeywordID = '" + id + "';";
 
-                    MySqlCommand values = new MySqlCommand(valueQuery, connect);
+                    //get ansIDs
+                    MySqlCommand values = new MySqlCommand(getAnswerIdsQuery, connect);
                     myReader = values.ExecuteReader();
-                    List<double> allValues = new List<double>();
+                    List<string> answerIDs = new List<string>();
                     while(myReader.Read()){
-                        allValues.Add(myReader.GetInt32(0));
+                        answerIDs.Add(myReader.GetString(0));
                     }
-                    Console.WriteLine(allValues);
                     myReader.Close();
-
-                    //read ansID
-                    myCommand = new MySqlCommand(selectAnsIDQuery, connect);
-                    myReader = myCommand.ExecuteReader();
-                    List<string> ansID = new List<string>();
-                    while (myReader.Read())
+                    
+                    foreach(string ansId in answerIDs)
                     {
-                        ansID.Add(myReader.GetString(0));
+                        if (!answers.ContainsKey(ansId))
+                        {
+                            answers.Add(ansId, new Answer());
+                            answers[ansId].ID = ansId;
+
+                            string selectQuestionQuery = "SELECT Question FROM answers WHERE ID ='" + ansId + "';";
+                            string selectAnswerQuery = "SELECT Answer FROM answers WHERE ID ='" + ansId + "';";
+
+                            myCommand = new MySqlCommand(selectAnswerQuery, connect);
+                            myReader = myCommand.ExecuteReader();
+                            if (myReader.Read())
+                            {
+                                answers[ansId].answer = myReader.GetString(0);
+                            }
+                            myReader.Close();
+
+                            myCommand = new MySqlCommand(selectQuestionQuery, connect);
+                            myReader = myCommand.ExecuteReader();
+                            if (myReader.Read())
+                            {
+                                answers[ansId].question = myReader.GetString(0);
+                            }
+
+                            myReader.Close();
+                        }
+
+                        string getKeywordRelevancy = "SELECT Relevance FROM keyword_relevancy WHERE KeywordID = '" + id + "' AND AnswerID = '" + ansId + "';";
+                        myCommand = new MySqlCommand(getKeywordRelevancy, connect);
+                        myReader = myCommand.ExecuteReader();
+                        double relevancy = -1;
+                        if (myReader.Read())
+                        {
+                            relevancy = myReader.GetInt32(0);
+                        }
+                        myReader.Close();
+
+                        answers[ansId].keywords.Add(keyword, relevancy);
+
                     }
-                    Console.WriteLine(ansID);
-                    myReader.Close();
-
-                    //read question
-                    myCommand = new MySqlCommand(selectQuestionQuery, connect);
-                    myReader = myCommand.ExecuteReader();
-                    List<string> question = new List<string>();
-                    while (myReader.Read())
-                    {
-                        question.Add(myReader.GetString(0));
-                    }
-                    Console.WriteLine(question);
-
-                    myReader.Close();
-
-                    Answer ans;
-
-                    for (int i = 0; i < ansString.Count; i++)
-                    {
-                        ans = new Answer(ansID[i], question[i], ansString[i]);
-                        ans.relevency = allValues[i];
-                        output.Add(ans);
-                    }
-
 
                 }
                 connect.Close();
-                return output;
 
+                List<Answer> output = new List<Answer>();
+                foreach (KeyValuePair<string, Answer> a in answers)
+                {
+                    output.Add(a.Value);
+                }
+                return output;
+               
 
             }
             catch (MySql.Data.MySqlClient.MySqlException ex)
@@ -199,10 +201,10 @@ namespace Chatbot
                 }
                 holdReader.Close();
 
-                foreach (String id in ansIDs)
+                foreach (string id in ansIDs)
                 {
-                    String selectQuestionQuery = "SELECT Question FROM answers WHERE ID ='" + id + "';";
-                    String selectAnswerQuery = "SELECT Answer FROM answers WHERE ID ='" + id + "';";
+                    string selectQuestionQuery = "SELECT Question FROM answers WHERE ID ='" + id + "';";
+                    string selectAnswerQuery = "SELECT Answer FROM answers WHERE ID ='" + id + "';";
 
 
                     MySqlDataReader myReader;
@@ -249,3 +251,4 @@ namespace Chatbot
     }
 }
 
+        
