@@ -27,6 +27,7 @@ export class Login extends Component {
         const result = await fetch('ChatBot/Login/' + username + '/' + password);
         const response = await result.text();
         sessionStorage.setItem("verificationIRPAChatbot", response);
+        this.fetchVerification();
         return;
     }
 
@@ -40,8 +41,8 @@ export class Login extends Component {
     }
 
     render() {
-        this.fetchVerification();
         if (this.state.verified == "Loading") {
+            this.fetchVerification();
             return (<div>Loading. Please wait.</div>);
         }
         if (this.state.verified == "VerifiedCertificate") {

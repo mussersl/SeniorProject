@@ -161,14 +161,14 @@ namespace Chatbot
             }
             return null;
         }
-        List <Answer> TotalOutput()
+        public List <Answer> TotalOutput()
         {
             List<Answer> output = new List<Answer>();
             try
             {
                 connection();
 
-                String selectAllKeywords = "Select * keyword From keywords";
+                String selectAllKeywords = "SELECT keyword FROM keywords";
 
                 MySqlDataReader holdReader;
 
@@ -205,7 +205,6 @@ namespace Chatbot
                     {
                         ansString.Add(myReader.GetString(0));
                     }
-                    Console.WriteLine(ansString);
                     myReader.Close();
 
                     //read ansID
@@ -216,7 +215,6 @@ namespace Chatbot
                     {
                         ansID.Add(myReader.GetString(0));
                     }
-                    Console.WriteLine(ansID);
                     myReader.Close();
 
                     //read question
@@ -227,7 +225,6 @@ namespace Chatbot
                     {
                         question.Add(myReader.GetString(0));
                     }
-                    Console.WriteLine(question);
 
                     myReader.Close();
 
@@ -236,6 +233,7 @@ namespace Chatbot
                     for (int i = 0; i < ansString.Count; i++)
                     {
                         ans = new Answer(ansID[i], question[i], ansString[i]);
+                        Console.WriteLine(ans.ansString);
                         output.Add(ans);
                     }
 
