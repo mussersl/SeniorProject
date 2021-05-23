@@ -42,12 +42,12 @@ namespace Chatbot
                 string finalResponse = "";
                 for (int i = 0; i < responses.Count; i++)
                 {
-                    if (i != 0) 
+                    if (i >= 2) 
                     {
-                        finalResponse += "(" + i + ") ";
+                        finalResponse += "(" + (i - 1) + ") ";
                     }
                     finalResponse += responses[i];
-                    finalResponse += "\n";
+                    finalResponse += " \n ";
                 }
                 return finalResponse;
             }

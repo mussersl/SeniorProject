@@ -296,8 +296,11 @@ namespace Chatbot
                             relevancy = myReader.GetInt32(0);
                         }
                         myReader.Close();
-
-                        answers[ansId].keywords.Add(keyword, relevancy);
+                        try
+                        {
+                            answers[ansId].keywords.Add(keyword, relevancy);
+                        }
+                        catch { }
 
                     }
 
