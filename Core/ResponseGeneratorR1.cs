@@ -44,7 +44,7 @@ namespace Chatbot
 						//Add all answers with a score within 8% to the list of answers
 						double temp = answers[i].relevency;
 						double diff = ((first - temp) / ((first + temp) / 2)) * 100;
-						if(diff < 8)
+						if(diff < 8 && i < 3)
                         {
 							totalIDs++;
 							hold.Add("(" + totalIDs.ToString() + ") " + answers[i].answer);
