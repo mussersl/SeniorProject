@@ -34,7 +34,7 @@ export class Management extends Component {
             let answer = document.getElementById("answerEdit").value;
             let fetchThing = 'ChatBot/Edit/' + this.state.ids[i] + '/' + question + '/' + answer;
             console.log(fetchThing);
-            const result = await fetch('ChatBot/Edit/' + this.state.ids[i] + '/' + encodeURIComponent(question) + '/' + encodeURIComponent(answer));
+            const result = await fetch('ChatBot/Edit/' + this.state.ids[i] + '/' + encodeURIComponent(question) + '/' + encodeURIComponent(answer) + '/' + sessionStorage.getItem("verificationIRPAChatbot"));
             const response = await result.text();
             this.setState({ loading: 0 });
             this.setState({
@@ -72,7 +72,7 @@ export class Management extends Component {
     delete(i) {
         return async function () {
             this.setState({ loading:1 });
-            const result = await fetch('ChatBot/Delete/' + this.state.ids[i]);
+            const result = await fetch('ChatBot/Delete/' + this.state.ids[i] + '/' + sessionStorage.getItem("verificationIRPAChatbot"));
             const response = await result.text();
             this.setState({ loading: 0 });
             //this.state.questions.splice(i, 1);

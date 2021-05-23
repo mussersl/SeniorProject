@@ -13,6 +13,8 @@ namespace SeniorProj.Controllers
     [Route("Chatbot")]
     public class ChatbotController : ControllerBase
     {
+        private string certificate = "jfjrisduhi4858tru544hgiriu9wt45hgr59u4y8gwwhtiw";
+        private string verificationMessage = "VerifiedCertificate";
         private readonly ILogger<ChatbotController> _logger;
 
         public ChatbotController(ILogger<ChatbotController> logger)
@@ -33,20 +35,34 @@ namespace SeniorProj.Controllers
             return temp;
         }
 
-        [HttpGet, Route("Edit/{id}/{question}/{answer}")]
-        public bool Edit(string id, string question, string answer)
+        [HttpGet, Route("Edit/{id}/{question}/{answer}/{certificate}")]
+        public bool Edit(string id, string question, string answer, string certificate)
         {
+            if (!certificate.Equals(this.certificate))
+            {
+                return false;
+            }
             Console.WriteLine("EDITTING");
             DatabaseEditor db = new Database();
             Answer a = new Answer(id, question, answer);
-            a.printToConsole();
+            KeywordParserInterface kp = new AllWordsParser();
+            List<string> keywords = kp.parseQuestion(question);
             db.editAnswer(a);
-            return false;
+            a.printToConsole();
+            foreach (string key in keywords)
+            {
+                ((Database)db).addKeywordToAnswer(a.ID, key);
+            }
+            return true;
         }
 
-        [HttpGet, Route("Delete/{id}")]
-        public bool Delete(string id)
+        [HttpGet, Route("Delete/{id}/{certificate}")]
+        public bool Delete(string id, string certificate)
         {
+            if(!certificate.Equals(this.certificate))
+            {
+                return false;
+            }
             new Database().Delete(id);
             return true;
         }
@@ -63,15 +79,20 @@ namespace SeniorProj.Controllers
         [HttpGet, Route("Login/{username}/{password}")]
         public string Login(string username, string password)
         {
-            return "jfjrisduhi4858tru544hgiriu9wt45hgr59u4y8gwwhtiw";
+            Database db = new Database();
+            if (db.VerifyLogin(username, password))
+            {
+                return certificate;
+            }
+            return "Incorrect";
         }
 
         [HttpGet, Route("VerifyLogin/{password}")]
         public string VerifyLogin(string password)
         {
-            if (password == "jfjrisduhi4858tru544hgiriu9wt45hgr59u4y8gwwhtiw")
+            if (password == certificate)
             {
-                return "VerifiedCertificate";
+                return verificationMessage;
             }
             else
             {

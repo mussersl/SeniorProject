@@ -14,7 +14,7 @@ namespace Chatbot
         }
         
         public void connection(){
-            string myConnectString = "server=137.112.237.187; port=3300;Database=body;uid=root;pwd=test;";
+            string myConnectString = "server=137.112.235.229; port=3300;Database=body;uid=root;pwd=test;";
             connect.ConnectionString = myConnectString;
             try
             {
@@ -37,6 +37,15 @@ namespace Chatbot
 
                 int i = myCommand.ExecuteNonQuery();
                 Console.WriteLine(1);
+
+                SQLQuery = "SELECT ID FROM answers WHERE Question = '" + ans.question + "' AND Answer = '" + ans.answer + "';";
+                myCommand = new MySqlCommand(SQLQuery, connect);
+                MySqlDataReader myReader = myCommand.ExecuteReader();
+                if (myReader.Read())
+                {
+                    ans.ID = myReader.GetString(0);
+                }
+
                 connect.Close();
                 return true;
 
@@ -67,6 +76,90 @@ namespace Chatbot
             {
                 Console.WriteLine(ex);
                 return false;
+            }
+        }
+
+        internal bool VerifyLogin(string username, string password)
+        {
+            try
+            {
+                connection();
+                string LoginQuery = "SELECT Password FROM login where Username = '" + username + "';";
+
+                MySqlCommand myCommand = new MySqlCommand(LoginQuery, connect);
+                MySqlDataReader myReader = myCommand.ExecuteReader();
+                string passwordCheck = "";
+                if (myReader.Read())
+                {
+                    passwordCheck = myReader.GetString(0);
+                }
+                myReader.Close();
+                connect.Close();
+
+                if (password != passwordCheck)
+                {
+                    return false;
+                }
+                return true;
+
+            }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+        }
+
+        internal bool addKeywordToAnswer(string ansID, string keyword)
+        {
+            try
+            {
+                connection();
+                MySqlCommand myCommand;
+                string SQLQuery = "INSERT INTO keywords (Keyword) VALUES  ('" + keyword + "');";
+                try
+                {
+                    myCommand = new MySqlCommand(SQLQuery, connect);
+                    int i = myCommand.ExecuteNonQuery();
+                }
+                catch (MySql.Data.MySqlClient.MySqlException ex)
+                {
+
+                }
+
+                SQLQuery = "SELECT ID FROM keywords WHERE Keyword = '" + keyword + "';";
+                myCommand = new MySqlCommand(SQLQuery, connect);
+                MySqlDataReader myReader = myCommand.ExecuteReader();
+                string keywordID = "";
+                if (myReader.Read())
+                {
+                    keywordID = myReader.GetString(0);
+                }
+                myReader.Close();
+
+                if (keywordID != "")
+                {
+                    SQLQuery = "INSERT INTO keyword_relevancy (KeywordID, Relevance, AnswerID) VALUES (" + keywordID + " ,30 ," + ansID + ");";
+                    try
+                    {
+                        myCommand = new MySqlCommand(SQLQuery, connect);
+                        int i = myCommand.ExecuteNonQuery();
+                    }
+                    catch (MySql.Data.MySqlClient.MySqlException ex)
+                    {
+
+                    }
+                }
+
+                connect.Close();
+                return true;
+
+            }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                connect.Close();
+                Console.WriteLine(ex);
+                return true;
             }
         }
 
