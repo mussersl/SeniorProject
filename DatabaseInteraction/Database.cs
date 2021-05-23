@@ -181,7 +181,7 @@ namespace Chatbot
                 if (incrementing){
                     i = (int)Math.Min(i * 1.1, 100);
                 }else{
-                    i = (int)Math.Max(i/1.1, 0);
+                    i = (int)Math.Max(i/1.1, 6);
                 }
                 SQlQuery = "UPDATE keyword_relevancy SET Relevance = '" + i.ToString() + "' WHERE KeywordID = " + keyID + " AND AnswerId = " + ansID + ";";
                 myCommand = new MySqlCommand(SQlQuery, connect);
