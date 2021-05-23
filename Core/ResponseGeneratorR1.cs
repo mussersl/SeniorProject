@@ -22,8 +22,7 @@ namespace Chatbot
 
 			//If no answer had a score above 30, then no answer is determined as valid
 			if (answers[0].relevency < 30){
-				hold.Add("1");
-				hold.Add(answers[0].ID);
+				hold.Add("1 " + answers[0].ID);
 				hold.Add("I'm not entirely sure what you were asking, but I think this is what you're looking for: ");
 				hold.Add(answers[0].answer);
 				return hold;
@@ -66,8 +65,7 @@ namespace Chatbot
 				}
 			}
 			//Return if only one answer was deemed valid
-			hold.Add("1");
-			hold.Add(answers[0].ID);
+			hold.Add("1 " + answers[0].ID);
 			hold.Add(answers[0].answer);
 			return hold;
 
