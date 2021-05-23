@@ -40,10 +40,14 @@ namespace Chatbot
                 
                 List<string> responses = rg.generateResponse(answers);
                 string finalResponse = "";
-                for(int i = 0; i < responses.Count; i++)
+                for (int i = 0; i < responses.Count; i++)
                 {
+                    if (i != 0) 
+                    {
+                        finalResponse += "(" + i + ") ";
+                    }
                     finalResponse += responses[i];
-                    finalResponse += '\n';
+                    finalResponse += "\n";
                 }
                 return finalResponse;
             }

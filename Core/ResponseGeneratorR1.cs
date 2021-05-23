@@ -9,40 +9,20 @@ namespace Chatbot
         public List<string> generateResponse(List<Answer> answers){
             var hold = new List<string>();
 
-			/*
-            double hold2 = -1;
-            double hold3 = -1;
-            int count = 0;
-			
-			             foreach (Answer keep in answers){
-                if(keep.relevency > hold3){
-                    hold3 = keep.relevency;
-                    hold2 = count;
-                    count += 1;
-                }
-            }
-            if(hold3 == -1){
-                hold.Add("No valid response detected");
-                return hold;
-            }
-            hold.Add(answers[(int)hold2].answer);
-            return hold;
-			*/
-
-
 
 			//Sort the list so that the most relevent answers are first
 			answers.Sort((Answer a, Answer b) => { return a.relevency.CompareTo(b.relevency); });
 
 			if(answers.Count == 0)
             {
-				hold.Add("Something's wrong");
+				hold.Add("I'm sorry, I'm not sure what you're asking for right now.");
 				return hold;
             }
 
 			//If no answer had a score above 30, then no answer is determined as valid
 			if (answers[0].relevency < 30){
-				hold.Add("No valid response detected");
+				hold.Add("I'm not entirely sure what you were asking, but I think this is what you're looking for: ");
+				hold.Add(answers[0].answer);
 				return hold;
 			}
 			
@@ -77,64 +57,6 @@ namespace Chatbot
 			
         }
 		
-		//Mergesort implementation originally written by Princi Singh, modified to work with answers
-		
-		public void Merge(List<Answer> answers, int l, int m, int r){
-		
-			int n1 = m - l + 1;
-        	int n2 = r - m;
-			
-		    List<Answer> L = new List<Answer>();
-       		List<Answer> R = new List<Answer>();
-        	int i, j;
-			
-			for (i = 0; i < n1; ++i)
-            	L[i] = answers[l + i];
-        	for (j = 0; j < n2; ++j)
-            	R[j] = answers[m + 1 + j];
-				
-			i = 0;
-       		j = 0;
-			
-			int k = l;
-        	while (i < n1 && j < n2) {
-            	if (L[i].relevency >= R[j].relevency) {
-                	answers[k] = L[i];
-                	i++;
-            	}
-            	else {
-                	answers[k] = R[j];
-                	j++;
-            	}
-            	k++;
-        	}
-			
-			while (i < n1) {
-            	answers[k] = L[i];
-            	i++;
-            	k++;
-        	}
-			
-			while (j < n2) {
-            	answers[k] = R[j];
-            	j++;
-            	k++;
-        	}
-			
-		}
-		
-		public void Sort(List<Answer> answers, int l, int r){
-			if (l < r) {
-           
-            	int m = l+ (r-l)/2;
- 
-            
-            	Sort(answers, l, m);
-            	Sort(answers, m + 1, r);
- 
-            	Merge(answers, l, m, r);
-        	}
-		}
 		
     }
 }
