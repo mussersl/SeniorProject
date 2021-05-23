@@ -14,7 +14,7 @@ namespace Chatbot
         }
         
         public void connection(){
-            string myConnectString = "server=137.112.237.187; port=3300;Database=body;uid=root;pwd=test;";
+            string myConnectString = "server=137.112.235.229; port=3300;Database=body;uid=root;pwd=test;";
             connect.ConnectionString = myConnectString;
             try
             {
@@ -156,8 +156,11 @@ namespace Chatbot
                             relevancy = myReader.GetInt32(0);
                         }
                         myReader.Close();
-
-                        answers[ansId].keywords.Add(keyword, relevancy);
+                        try
+                        {
+                            answers[ansId].keywords.Add(keyword, relevancy);
+                        }
+                        catch { }
 
                     }
 

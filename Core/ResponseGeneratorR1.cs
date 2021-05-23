@@ -34,18 +34,31 @@ namespace Chatbot
 				//Check if the top 2 answers have a score within 8% of each other
 				double percentDiff = ((first - second) / ((first + second) / 2)) * 100;
 				if(percentDiff < 8){
+					int totalIDs = 0;
+					string ids = "";
+					string idString = "";
 					hold.Add("Multiple potential responses:");
 					for(int i = 0; i < answers.Count; i++){
 						//Add all answers with a score within 8% to the list of answers
 						double temp = answers[i].relevency;
 						double diff = ((first - temp) / ((first + temp) / 2)) * 100;
 						if(diff < 8)
+                        {
 							hold.Add(answers[i].answer);
-						else
+							totalIDs++;
+							ids += answers[i].ID + " ";
+						}
+                        else
+						{
 							//return if an answer is outside of the threshold
+							idString = totalIDs.ToString() + " " + ids;
+							hold.Insert(0, idString);
 							return hold;
+						}
 					}
-					//return either if all answers were in the threshold
+					//return if all answers were in the threshold
+					idString = totalIDs.ToString() + " " + ids;
+					hold.Insert(0, idString);
 					return hold;
 				}
 			}
