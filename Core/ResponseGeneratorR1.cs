@@ -15,13 +15,14 @@ namespace Chatbot
 
 			if(answers.Count == 0)
             {
-				hold.Add("Something's wrong");
+				hold.Add("I'm sorry, I'm not sure what you're asking for right now.");
 				return hold;
             }
 
 			//If no answer had a score above 30, then no answer is determined as valid
 			if (answers[0].relevency < 30){
-				hold.Add("No valid response detected");
+				hold.Add("I'm not entirely sure what you were asking, but I think this is what you're looking for: ");
+				hold.Add(answers[0].answer);
 				return hold;
 			}
 			
