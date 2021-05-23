@@ -6,10 +6,6 @@ namespace Chatbot
 {
     public class Answer
     {
-        public string answerID;
-        public string ansString;
-        public string questionString;
-
         public Answer()
         {
             keywords = new Dictionary<string, double>();
