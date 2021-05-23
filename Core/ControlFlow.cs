@@ -47,7 +47,7 @@ namespace Chatbot
                         finalResponse += "(" + (i - 1) + ") ";
                     }
                     finalResponse += responses[i];
-                    finalResponse += "\n";
+                    finalResponse += " \n ";
                 }
                 return finalResponse;
             }
