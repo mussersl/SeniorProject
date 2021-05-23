@@ -163,6 +163,39 @@ namespace Chatbot
             }
         }
 
+        public bool relevancyModification(string ansID, string keyID, bool incrementing)
+        {
+            try
+            {
+                connection();
+                string SQlQuery = "SELECT Relevance FROM keyword_relevancy WHERE KeywordID = " + keyID + " AND AnswerId = " + ansID + ";";
+                MySqlCommand myCommand = new MySqlCommand(SQlQuery, connect);
+                MySqlDataReader myReader = myCommand.ExecuteReader();
+                int i;
+                if (myReader.Read())
+                {
+                    int.TryParse(myReader.GetString(0), out i);
+                }else{
+                    return false;
+                }
+                if (incrementing){
+                    i = Math.Min(i + 1, 100);
+                }else{
+                    i = Math.Max(i - 1, 0);
+                }
+                SQlQuery = "UPDATE keyword_relevancy SET Relevance = '" + i.ToString() + "' WHERE KeywordID = " + keyID + " AND AnswerId = " + ansID + ";";
+                myCommand = new MySqlCommand(SQlQuery, connect);
+                int j = myCommand.ExecuteNonQuery();
+                Console.WriteLine(j);
+                connect.Close();
+                return true;
+            }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                connect.Close();
+                return false;
+            }
+        }
         bool DatabaseEditor.editAnswer(Answer ans)
         {
             try
