@@ -33,16 +33,22 @@ namespace SeniorProj.Controllers
             return temp;
         }
 
-        [HttpPost, Route("Edit/{id}/{question}/{answer}")]
+        [HttpGet, Route("Edit/{id}/{question}/{answer}")]
         public bool Edit(string id, string question, string answer)
         {
+            Console.WriteLine("EDITTING");
+            DatabaseEditor db = new Database();
+            Answer a = new Answer(id, question, answer);
+            a.printToConsole();
+            db.editAnswer(a);
             return false;
         }
 
-        [HttpPost, Route("Delete/{id}")]
+        [HttpGet, Route("Delete/{id}")]
         public bool Delete(string id)
         {
-            return false;
+            new Database().Delete(id);
+            return true;
         }
 
         [HttpGet, Route("GetAll")]
@@ -51,12 +57,6 @@ namespace SeniorProj.Controllers
 
             Database db = new Database();
             List<Answer> output = db.TotalOutput();
-            Console.WriteLine("THIS IS THE NUM OF ANS " + output.Count);
-            foreach(Answer a in output)
-            {
-                a.printToConsole();
-                Console.WriteLine("THIS SHOULD BE A REPEAT OF THE ID: " + a.ID);
-            }
             return Enumerable.Range(0, output.Count).Select(index => output[index]).ToArray();
         }
 

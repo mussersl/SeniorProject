@@ -19,7 +19,6 @@ namespace Chatbot
             try
             {
                 connect.Open();
-                Console.WriteLine("MariaDB connected: " + myConnectString);
             }
             catch(MySql.Data.MySqlClient.MySqlException ex){
                 Console.WriteLine("Error received: "+ex);
@@ -32,18 +31,37 @@ namespace Chatbot
             try
             {
                 connection();
-                String SQLQuery = "INSERT INTO answers VALUES(@name1, @name2, @name3); ";
+                string SQLQuery = "INSERT INTO answers (Question, Answer) VALUES ('" + ans.question + "', '" + ans.answer + "'); ";
                 
                 MySqlCommand myCommand = new MySqlCommand(SQLQuery, connect);
-                myCommand.Parameters.AddWithValue("name1", ans.answerID);
-                myCommand.Parameters.AddWithValue("name2", ans.questionString);
-                myCommand.Parameters.AddWithValue("name3", ans.ansString);
 
                 int i = myCommand.ExecuteNonQuery();
                 Console.WriteLine(1);
                 connect.Close();
                 return true;
 
+            }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+        }
+
+        public bool Delete(string id)
+        {
+            try
+            {
+                connection();
+                string deleteQuery = "DELETE FROM answers WHERE ID = " + id + ";";
+                string deleteRelevancyQuery = "DELETE FROM keyword_relevancy WHERE AnswerID = " + id + ";";
+
+                MySqlCommand myCommand = new MySqlCommand(deleteQuery, connect);
+                int i = myCommand.ExecuteNonQuery();
+                myCommand = new MySqlCommand(deleteRelevancyQuery, connect);
+                i = myCommand.ExecuteNonQuery();
+                connect.Close();
+                return true;
             }
             catch (MySql.Data.MySqlClient.MySqlException ex)
             {
@@ -57,24 +75,20 @@ namespace Chatbot
             try
             {
                 connection();
-                String SQLQuery = "UPDATE answers SET Answer = @name3, Question = @name2 " +
-                    "WHERE ID = @name1; ";
+                string SQLQuery = "UPDATE answers SET Question = '" + ans.question + "', Answer = '" + ans.answer + "' WHERE ID = " + ans.ID + ";";
 
                 MySqlCommand myCommand = new MySqlCommand(SQLQuery, connect);
-                myCommand.Parameters.AddWithValue("name1", ans.answerID);
-                myCommand.Parameters.AddWithValue("name2", ans.questionString);
-                myCommand.Parameters.AddWithValue("name3", ans.ansString);
-
                 int i = myCommand.ExecuteNonQuery();
-                Console.WriteLine(1);
+                Console.WriteLine(i);
                 connect.Close();
                 return true;
 
             }
             catch (MySql.Data.MySqlClient.MySqlException ex)
             {
-                Console.WriteLine(ex);
-                return false;
+                connect.Close();
+                ((DatabaseEditor)this).addAnswer(ans);
+                return true;
             }
         }
 

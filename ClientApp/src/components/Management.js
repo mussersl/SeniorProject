@@ -32,7 +32,9 @@ export class Management extends Component {
             this.setState({ loading: 1 });
             let question = document.getElementById("questionEdit").value;
             let answer = document.getElementById("answerEdit").value;
-            const result = await fetch('ChatBot/Edit/' + this.state.ids[i] + '/' + question + '/' + answer);
+            let fetchThing = 'ChatBot/Edit/' + this.state.ids[i] + '/' + question + '/' + answer;
+            console.log(fetchThing);
+            const result = await fetch('ChatBot/Edit/' + this.state.ids[i] + '/' + encodeURIComponent(question) + '/' + encodeURIComponent(answer));
             const response = await result.text();
             this.setState({ loading: 0 });
             this.setState({
@@ -93,14 +95,14 @@ export class Management extends Component {
         }
         const result = await fetch('ChatBot/GetAll');
         const response = await result.json();
-        console.log("Answers Fetched");
         this.state.questions = [];
         this.state.answers = [];
+        this.state.ids = [];
         this.state.count = 0;
         for (let i = 0; i < response.length; i = i + 1) {
             this.state.questions.push(response[i].question);
             this.state.answers.push(response[i].answer);
-            this.state.ids.push(response[i].ID);
+            this.state.ids.push(response[i].id);
             this.state.count++;
         }
         if (this.state.adding == 1) {
@@ -116,12 +118,12 @@ export class Management extends Component {
 
     renderAnswers() {
         this.getanswers();
-        let uitems = []
+        let uitems = [];
         if (this.state.got == 0) {
             uitems.push(<div>Fetching answers from database</div>);
         }
-        let i = 0;
-        while (i < this.state.count) {
+        let i = this.state.count - 1;
+        while (i > -1) {
             if (i == this.state.edit) {
                 uitems.push(
                     <div class="row answerEntry" id="testAnswer">
@@ -159,7 +161,7 @@ export class Management extends Component {
                         </div>
                     </div>);
             }
-            i++;
+            i--;
         }
 
         return uitems;
@@ -178,7 +180,7 @@ export class Management extends Component {
           <div id="mainPage" class="container page-container">
               <div class="row">
                   <div class="col">
-                      <button id="addAnswer" class="btn btn-primary" type="submit" onClick={this.addAnswer.bind(this)}>Add Answer</button>
+                      <button id="addAnswer" class="btn btn-primary" type="submit" onClick={this.addAnswer.bind(this)} disabled={this.state.got == 0}>Add Answer</button>
                   </div>
               </div>
               <div class="row">
