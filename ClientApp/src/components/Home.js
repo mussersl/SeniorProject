@@ -6,7 +6,7 @@ export class Home extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { chatList: [], count: 0};
+        this.state = { chatList: [], count: 0, ansIdList: [], lastQuestion: ""};
         this.askButton = this.askButton.bind(this);
         this.renderlog = this.renderlog.bind(this);
     }
@@ -40,7 +40,8 @@ export class Home extends Component {
         this.state.chatList.push(new speech(question, 1));
         this.setState({
             chatList: this.state.chatList,
-            count: this.state.count + 1
+            count: this.state.count + 1,
+            lastQuestion: question
         });
 
         // clear question from text input
@@ -50,14 +51,34 @@ export class Home extends Component {
         const result = await fetch('ChatBot/Ask/' + question);
         const response = await result.text();
 
-        //let response = this.chatBotAskQuestion(question);
-        this.state.chatList.push(new speech(response, 0));
+        var responseParsed = response.split(' ');
+        this.state.ansIdList = [];
+        const index = Number(responseParsed[0]);
+        for (let i = 0; i < index; i++) {
+            this.state.ansIdList.push(responseParsed[i+1]);
+        }
+
+        var returnResponse = "";
+        for (let i = index + 1; i < responseParsed.length; i++) {
+            if (responseParsed[i] == "\n") {
+                if (returnResponse != "" && returnResponse != "\n" && returnResponse != null && returnResponse != " ") {
+                    this.state.chatList.push(new speech(returnResponse, 0));
+                    this.state.count++;
+                    returnResponse = "";
+                }
+                continue;
+            }
+            returnResponse += responseParsed[i] + ' ';
+        }
+
+        if (returnResponse != "" && returnResponse != "\n" && returnResponse != null && returnResponse != " ") {
+            this.state.chatList.push(new speech(returnResponse, 0));
+        }
         this.setState({
             chatList: this.state.chatList,
-            count: this.state.count + 1
+            count: this.state.count + 1,
+            ansIdList: this.state.ansIdList
         });
-
-        this.render();
     }
 
     renderlog() {
