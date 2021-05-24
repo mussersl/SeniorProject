@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using Chatbot;
 using MySql.Data.MySqlClient;
@@ -14,7 +15,9 @@ namespace Chatbot
         }
         
         public void connection(){
-            string myConnectString = "server=137.112.229.203; port=3300;Database=body;uid=root;pwd=test;";
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "\\IP.txt");
+            string text = System.IO.File.ReadAllText(@path);
+            string myConnectString = "server=" + text + "; port=3300;Database=body;uid=root;pwd=test;";
             connect.ConnectionString = myConnectString;
             try
             {
