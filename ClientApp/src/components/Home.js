@@ -40,8 +40,7 @@ export class Home extends Component {
         this.state.chatList.push(new speech(question, 1));
         this.setState({
             chatList: this.state.chatList,
-            count: this.state.count + 1,
-            lastQuestion: question
+            count: this.state.count + 1
         });
 
         if (question.toLowerCase() == "wrong" || question.toLowerCase() == "no") {
@@ -112,7 +111,8 @@ export class Home extends Component {
         this.setState({
             chatList: this.state.chatList,
             count: this.state.count + 1,
-            ansIdList: this.state.ansIdList
+            ansIdList: this.state.ansIdList,
+            lastQuestion: question
         });
     }
 

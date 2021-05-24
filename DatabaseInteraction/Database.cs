@@ -173,24 +173,25 @@ namespace Chatbot
                 MySqlCommand myCommand = new MySqlCommand(SQlQuery, connect);
                 MySqlDataReader myReader = myCommand.ExecuteReader();
                 Console.WriteLine("COMMAND EXECUTED");
-                string temp = "-1";
+                int i = 0;
                 if (myReader.Read())
                 {
-                    temp = myReader.GetString(0);
+                    i = myReader.GetInt32(0);
                 }else{
                     return false;
                 }
-                int i = Int32.Parse(temp);
                 Console.WriteLine("RELEVANCY: "+i);
                 if (incrementing){
-                    i = (int)Math.Min(i * 1.1, 100);
+                    i = (int)Math.Min((i+1) * 1.1, 100);
                 }else{
                     i = (int)Math.Max(i/1.1, 6);
                 }
-                //SQlQuery = "UPDATE keyword_relevancy SET Relevance = " + i + " WHERE KeywordID = " + keyID + " AND AnswerID = " + ansID + ";";
-                //myCommand = new MySqlCommand(SQlQuery, connect);
-                //int j = myCommand.ExecuteNonQuery();
-                //Console.WriteLine(j);
+                Console.WriteLine("RELEVANCY: " + i);
+                myReader.Close();
+                SQlQuery = "UPDATE keyword_relevancy SET Relevance = " + i + " WHERE KeywordID = " + keyID + " AND AnswerID = " + ansID + ";";
+                myCommand = new MySqlCommand(SQlQuery, connect);
+                int j = myCommand.ExecuteNonQuery();
+                Console.WriteLine(j);
                 connect.Close();
                 return true;
             }
