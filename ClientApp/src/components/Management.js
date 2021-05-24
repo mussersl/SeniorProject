@@ -7,7 +7,7 @@ export class Management extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { count: 0, questions: [], answers: [], ids: [], edit: -1, adding: 0, loading: 0, verified: "Loading", got: 0 };
+        this.state = { count: 0, questions: [], answers: [], ids: [], edit: -1, adding: 0, loading: 0, verified: "Loading", got: 0, updateInfo: 0 };
     }
 
     async fetchVerification() {
@@ -176,11 +176,17 @@ export class Management extends Component {
         if (this.state.verified != "VerifiedCertificate") {
             return (<Redirect to='/Login' />);
         }
+        if (this.state.updateInfo == 1) {
+            return this.renderUpdateLogin();
+        }
       return (
           <div id="mainPage" class="container page-container">
               <div class="row">
                   <div class="col">
                       <button id="addAnswer" class="btn btn-primary" type="submit" onClick={this.addAnswer.bind(this)} disabled={this.state.got == 0}>Add Answer</button>
+                  </div>
+                  <div class="col">
+                      <button id="changeLogin" class="btn btn-primary" type="submit" onClick={this.setUpdate.bind(this)} disabled={this.state.got == 0}>Change Username or password</button>
                   </div>
               </div>
               <div class="row">
@@ -196,6 +202,95 @@ export class Management extends Component {
                   $("body").bootstrapMaterialDesign();
               </script>
           </div>
-    );
-  }
+        );
+    }
+
+    setUpdate() {
+        this.setState({ updateInfo: 1 });
+        return;
+    }
+
+    renderUpdateLogin() {
+        return (
+            <div id="mainPage" class="container page-container">
+
+                <div class="row justify-content-center">
+                    <div class="col-5">
+                        <div id="textbox">
+                            <div>Username</div>
+                            <div class="form-group">
+                                <input id="usernameirpa" onKeyDown={this.handleKeyPress} class="form-control" placeholder="username" />
+                            </div>
+                        </div>
+                        <div id="textbox">
+                            <div>Password</div>
+                            <div class="form-group">
+                                <input id="passwordirpa" onKeyDown={this.handleKeyPress} class="form-control" type="password" placeholder="password" />
+                            </div>
+                        </div>
+                        <div id="textbox">
+                            <div>New Username (leave blank if you want it to remain unchanged)</div>
+                            <div class="form-group">
+                                <input id="newusernameirpa" onKeyDown={this.handleKeyPress} class="form-control" placeholder="username" />
+                            </div>
+                        </div>
+                        <div id="textbox">
+                            <div>New Password</div>
+                            <div class="form-group">
+                                <input id="newpasswordirpa" onKeyDown={this.handleKeyPress} class="form-control" type="password" placeholder="password" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <button id="login-button" class="btn btn-primary" type="submit" onClick={this.changeLogin.bind(this)}>Login</button>
+                            <button class="btn btn-primary" type="submit" onClick={this.resetUpdate.bind(this)}>Cancel</button>
+                        </div>
+                        <div id="error"></div>
+                    </div>
+                </div>
+
+                <script>
+                    $("body").bootstrapMaterialDesign();
+              </script>
+            </div>
+        );
+    }
+
+    resetUpdate() {
+        this.setState({ updateInfo: 0 });
+    }
+
+    handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            this.changeLogin();
+            event.stopPropagation();
+            event.preventDefault();
+        }
+        return;
+    }
+
+    async changeLogin() {
+        let username = document.getElementById("usernameirpa").value;
+        let password = document.getElementById("passwordirpa").value;
+        let newusername = document.getElementById("newusernameirpa").value;
+        let newpassword = document.getElementById("newpasswordirpa").value;
+        let ct = sessionStorage.getItem("verificationIRPAChatbot");
+        if (newusername != null) {
+            const result = await fetch('ChatBot/changeUsername/' + newusername + '/' + password + '/'+ ct);
+            if (await result.text() != "true") {
+                document.getElementById("error").innerHTML = "Incorrect username or password.";
+                return;
+            }
+            console.log(await result.text());
+            username = newusername;
+        }
+
+        if (newpassword != null) {
+            const result = await fetch('ChatBot/changePassword/' + username + '/' + newpassword + '/' + ct);
+            if (await result.text() != "true") {
+                document.getElementById("error").innerHTML = "Incorrect username or password.";
+                return;
+            }
+        }
+        this.setState({ updateInfo: 0 });
+    }
 }

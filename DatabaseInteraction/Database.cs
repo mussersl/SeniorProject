@@ -63,13 +63,14 @@ namespace Chatbot
         public bool changeUsername(string username, string password){
             try{
                 connection();
-                string SQlQuery = "UPDATE login SET Username = " + username + " WHERE Password = " + password + ";";
+                string SQlQuery = "UPDATE login SET Username = '" + username + "' WHERE Password = '" + password + "';";
                 MySqlCommand myCommand = new MySqlCommand(SQlQuery, connect);
                 int j = myCommand.ExecuteNonQuery();
                 Console.WriteLine(j);
                 connect.Close();
-                return true;
+                return j > 0;
             }catch{
+                Console.WriteLine("Failed to update username.");
                 connect.Close();
                 return false;
             }
@@ -77,15 +78,17 @@ namespace Chatbot
         }
 
         public bool changePassword(string username, string password){
-            try{
+            try
+            {
                 connection();
-                string SQlQuery = "UPDATE login SET Password = " + password + " WHERE Username = " + username + ";";
+                string SQlQuery = "UPDATE login SET Password = '" + password + "' WHERE Username = '" + username + "';";
                 MySqlCommand myCommand = new MySqlCommand(SQlQuery, connect);
                 int j = myCommand.ExecuteNonQuery();
                 Console.WriteLine(j);
                 connect.Close();
-                return true;
+                return j > 0;
             }catch{
+                Console.WriteLine("Failed to update password.");
                 connect.Close();
                 return false;
             }

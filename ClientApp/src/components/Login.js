@@ -21,9 +21,7 @@ export class Login extends Component {
 
     async verifyLogin() {
         let username = document.getElementById("usernameirpa").value;
-        console.log(username);
         let password = document.getElementById("passwordirpa").value;
-        console.log(password);
         const result = await fetch('ChatBot/Login/' + username + '/' + password);
         const response = await result.text();
         sessionStorage.setItem("verificationIRPAChatbot", response);

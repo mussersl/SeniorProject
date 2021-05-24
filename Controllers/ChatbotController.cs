@@ -125,25 +125,24 @@ namespace SeniorProj.Controllers
         }
 
 
-
+        [HttpGet, Route("changeUsername/{username}/{password}/{certificate}")]
         public bool changeUsername(string username, string password, string certificate){
             if(!certificate.Equals(this.certificate))
             {
                 return false;
             }
             Database db = new Database();
-            db.changeUsername(username, password);
-            return true;
+            return db.changeUsername(username, password); ;
         }
 
+        [HttpGet, Route("changePassword/{username}/{password}/{certificate}")]
         public bool changePassword(string username, string password, string certificate){
             if(!certificate.Equals(this.certificate))
             {
                 return false;
             }
             Database db = new Database();
-            db.changePassword(username, password);
-            return true;
+            return db.changePassword(username, password); ;
         }
     }
 }
