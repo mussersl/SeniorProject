@@ -149,7 +149,6 @@ namespace Chatbot
                 case "each":
                 case "edu":
                 case "eg":
-                case "eight":
                 case "either":
                 case "else":
                 case "elsewhere":
@@ -172,9 +171,6 @@ namespace Chatbot
                 case "f":
                 case "far":
                 case "few":
-                case "fifth":
-                case "first":
-                case "five":
                 case "followed":
                 case "following":
                 case "follows":
@@ -182,7 +178,6 @@ namespace Chatbot
                 case "former":
                 case "formerly":
                 case "forth":
-                case "four":
                 case "from":
                 case "further":
                 case "furthermore":
@@ -319,17 +314,13 @@ namespace Chatbot
                 case "neither":
                 case "never":
                 case "nevertheless":
-                case "new":
                 case "next":
-                case "nine":
                 case "no":
                 case "nobody":
-                case "non":
                 case "none":
                 case "noone":
                 case "nor":
                 case "normally":
-                case "not":
                 case "nothing":
                 case "novel":
                 case "now":
@@ -397,7 +388,6 @@ namespace Chatbot
                 case "say":
                 case "saying":
                 case "says":
-                case "second":
                 case "secondly":
                 case "see":
                 case "seeing":
@@ -412,14 +402,12 @@ namespace Chatbot
                 case "sent":
                 case "serious":
                 case "seriously":
-                case "seven":
                 case "several":
                 case "shall":
                 case "she":
                 case "should":
                 case "shouldn't":
                 case "since":
-                case "six":
                 case "so":
                 case "some":
                 case "somebody":
@@ -476,13 +464,11 @@ namespace Chatbot
                 case "they're":
                 case "they've":
                 case "think":
-                case "third":
                 case "this":
                 case "thorough":
                 case "thoroughly":
                 case "those":
                 case "though":
-                case "three":
                 case "through":
                 case "throughout":
                 case "thru":
@@ -498,8 +484,6 @@ namespace Chatbot
                 case "truly":
                 case "try":
                 case "trying":
-                case "twice":
-                case "two":
                 case "u":
                 case "un":
                 case "under":
@@ -590,7 +574,6 @@ namespace Chatbot
                 case "yourself":
                 case "yourselves":
                 case "z":
-                case "zero":
                     isStopWord = true;
                     break;
             }
