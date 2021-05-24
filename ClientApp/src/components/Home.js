@@ -46,7 +46,7 @@ export class Home extends Component {
 
         if (question.toLowerCase() == "wrong" || question.toLowerCase() == "no") {
             for (let i = 0; i < this.state.ansIdList.length; i++) {
-                let increment = await fetch('ChatBot/Decrement/' + this.state.ansIdList[Number(question) - 1] + '/' + this.state.lastQuestion);
+                let increment = await fetch('ChatBot/Decrement/' + this.state.ansIdList[i] + '/' + this.state.lastQuestion);
                 await increment.text();
             }
             this.state.chatList.push(new speech("Thank you for your feedback. Please try restating your question.",0));

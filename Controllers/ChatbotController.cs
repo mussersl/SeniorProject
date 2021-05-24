@@ -102,11 +102,14 @@ namespace SeniorProj.Controllers
 
 
        public void helperCall (string answerID, string question, bool incrementing){
+            Console.WriteLine("ANSWER ID: " + answerID + ": QUESTION: " + question);
             Database db = new Database();
             AllWordsParser AWP = new AllWordsParser();
             List<string> hold = AWP.parseQuestion(question);
             foreach(string s in hold){
-                db.relevancyModification(answerID, db.queryDatabaseForKeywordID(s), incrementing);
+                string keyID = db.queryDatabaseForKeywordID(s);
+                Console.WriteLine(s + " ID: " + keyID);
+                db.relevancyModification(answerID, keyID, incrementing);
             }
 
         }

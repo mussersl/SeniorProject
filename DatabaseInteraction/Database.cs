@@ -168,30 +168,35 @@ namespace Chatbot
             try
             {
                 connection();
-                string SQlQuery = "SELECT Relevance FROM keyword_relevancy WHERE KeywordID = " + keyID + " AND AnswerId = " + ansID + ";";
+                Console.WriteLine("UPDATE: " + keyID + " " + ansID);
+                string SQlQuery = "SELECT Relevance FROM keyword_relevancy WHERE KeywordID = " + keyID + " AND AnswerID = " + ansID + ";";
                 MySqlCommand myCommand = new MySqlCommand(SQlQuery, connect);
                 MySqlDataReader myReader = myCommand.ExecuteReader();
-                int i;
+                Console.WriteLine("COMMAND EXECUTED");
+                string temp = "-1";
                 if (myReader.Read())
                 {
-                    int.TryParse(myReader.GetString(0), out i);
+                    temp = myReader.GetString(0);
                 }else{
                     return false;
                 }
+                int i = Int32.Parse(temp);
+                Console.WriteLine("RELEVANCY: "+i);
                 if (incrementing){
                     i = (int)Math.Min(i * 1.1, 100);
                 }else{
                     i = (int)Math.Max(i/1.1, 6);
                 }
-                SQlQuery = "UPDATE keyword_relevancy SET Relevance = '" + i.ToString() + "' WHERE KeywordID = " + keyID + " AND AnswerId = " + ansID + ";";
-                myCommand = new MySqlCommand(SQlQuery, connect);
-                int j = myCommand.ExecuteNonQuery();
-                Console.WriteLine(j);
+                //SQlQuery = "UPDATE keyword_relevancy SET Relevance = " + i + " WHERE KeywordID = " + keyID + " AND AnswerID = " + ansID + ";";
+                //myCommand = new MySqlCommand(SQlQuery, connect);
+                //int j = myCommand.ExecuteNonQuery();
+                //Console.WriteLine(j);
                 connect.Close();
                 return true;
             }
             catch (MySql.Data.MySqlClient.MySqlException ex)
             {
+                Console.WriteLine(ex);
                 connect.Close();
                 return false;
             }
@@ -239,8 +244,10 @@ namespace Chatbot
                     id = myReader.GetString(0);
                 }
                 myReader.Close();
+                connect.Close();
                 return id;
             }catch{
+                connect.Close();
                 return null;
             }
 
