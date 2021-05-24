@@ -34,7 +34,7 @@ export class Home extends Component {
 
     // Function attached to ask button
     async askButton() {
-        let question = document.getElementById("questioninput").value;
+        let question = document.getElementById("questioninput").value.trim();
 
         // add question to log
         this.state.chatList.push(new speech(question, 1));
@@ -43,6 +43,41 @@ export class Home extends Component {
             count: this.state.count + 1,
             lastQuestion: question
         });
+
+        if (question.toLowerCase() == "wrong" || question.toLowerCase() == "no") {
+            for (let i = 0; i < this.state.ansIdList.length; i++) {
+                let increment = await fetch('ChatBot/Decrement/' + this.state.ansIdList[Number(question) - 1] + '/' + this.state.lastQuestion);
+                await increment.text();
+            }
+            this.state.chatList.push(new speech("Thank you for your feedback. Please try restating your question.",0));
+            this.setState({
+                chatList: this.state.chatList,
+                count: this.state.count + 1,
+                ansIdList: [],
+                lastQuestion: ""
+            });
+            return;
+        }
+
+        if (Number(question) < this.state.ansIdList.length + 1 && Number(question) > 0) {
+            for (let i = 0; i < this.state.ansIdList.length; i++) {
+                let increment;
+                if (i == Number(question) - 1) {
+                    increment = await fetch('ChatBot/Increment/' + this.state.ansIdList[Number(question) - 1] + '/' + this.state.lastQuestion);
+                } else {
+                    increment = await fetch('ChatBot/Decrement/' + this.state.ansIdList[Number(question) - 1] + '/' + this.state.lastQuestion);
+                }
+                await increment.text();
+            }
+            this.state.chatList.push(new speech("Thank you for your feedback.",0));
+            this.setState({
+                chatList: this.state.chatList,
+                count: this.state.count + 1,
+                ansIdList: [],
+                lastQuestion: ""
+            });
+            return;
+        }
 
         // clear question from text input
         document.getElementById("questioninput").value = "";
