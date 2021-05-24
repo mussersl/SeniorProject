@@ -11,7 +11,7 @@ namespace Chatbot
 
 
 			//Sort the list so that the most relevent answers are first
-			answers.Sort((Answer a, Answer b) => { return a.relevency.CompareTo(b.relevency); });
+			answers.Sort((Answer a, Answer b) => { return b.relevency.CompareTo(a.relevency); });
 
 			if(answers.Count == 0)
             {
@@ -44,7 +44,7 @@ namespace Chatbot
 						//Add all answers with a score within 8% to the list of answers
 						double temp = answers[i].relevency;
 						double diff = ((first - temp) / ((first + temp) / 2)) * 100;
-						if(diff < 8)
+						if(diff < 8 && i < 3)
                         {
 							totalIDs++;
 							hold.Add("(" + totalIDs.ToString() + ") " + answers[i].answer);
