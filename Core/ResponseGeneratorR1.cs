@@ -11,7 +11,7 @@ namespace Chatbot
 
 
 			//Sort the list so that the most relevent answers are first
-			answers.Sort((Answer a, Answer b) => { return a.relevency.CompareTo(b.relevency); });
+			answers.Sort((Answer a, Answer b) => { return b.relevency.CompareTo(a.relevency); });
 
 			if(answers.Count == 0)
             {
