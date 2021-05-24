@@ -103,7 +103,12 @@ namespace SeniorProj.Controllers
 
        public void helperCall (string answerID, string question, bool incrementing){
             Database db = new Database();
-            db.relevancyModification(answerID, db.queryDatabaseForKeywordID(question), incrementing);
+            AllWordsParser AWP = new AllWordsParser();
+            List<string> hold = AWP.parseQuestion(question);
+            foreach(string s in hold){
+                db.relevancyModification(answerID, db.queryDatabaseForKeywordID(s), incrementing);
+            }
+
         }
 
         [HttpGet, Route("Increment/{answerID}/{question}")]
