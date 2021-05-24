@@ -99,5 +99,22 @@ namespace SeniorProj.Controllers
                 return "No";
             }
         }
+
+
+        [HttpGet, Route("helperCall/{answerID}/{question}/{incrementing}")]
+        public void helperCall (string answerID, string question, bool incrementing){
+            Database db = new Database();
+            db.relevancyModification(answerID, db.queryDatabaseForKeywordID(question), incrementing);
+        }
+
+        [HttpGet, Route("incrementCall/{answerID}/{question}")]
+        public void incrementCall(string answerID, string question){
+            this.helperCall(answerID, question, true);
+        }
+
+        [HttpGet, Route("decrementCall/{answerID}/{question}")]
+        public void decrementCall(string answerID, string question){
+            this.helperCall(answerID, question, false);
+        }
     }
 }

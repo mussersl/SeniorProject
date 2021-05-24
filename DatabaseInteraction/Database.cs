@@ -226,6 +226,26 @@ namespace Chatbot
             throw new NotImplementedException();
         }
 
+        
+        public string queryDatabaseForKeywordID(string keyword){
+            try{
+                connection();
+                string selectKeywordId = "SELECT ID FROM keywords WHERE Keyword = '" + keyword + "';";
+                MySqlDataReader myReader;
+                MySqlCommand MyCommand = new MySqlCommand(selectKeywordId, connect);
+                myReader = MyCommand.ExecuteReader();
+                string id = "-1";
+                if (myReader.Read()){
+                    id = myReader.GetString(0);
+                }
+                myReader.Close();
+                return id;
+            }catch{
+                return null;
+            }
+
+        }
+        
         List<Answer> DatabaseQueryInterface.queryDatabaseOnKeywords(List<string> keywords)
         {
             try
