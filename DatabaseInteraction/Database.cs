@@ -60,6 +60,37 @@ namespace Chatbot
             }
         }
 
+        public bool changeUsername(string username, string password){
+            try{
+                connection();
+                string SQlQuery = "UPDATE login SET Username = " + username + " WHERE Password = " + password + ";";
+                MySqlCommand myCommand = new MySqlCommand(SQlQuery, connect);
+                int j = myCommand.ExecuteNonQuery();
+                Console.WriteLine(j);
+                connect.Close();
+                return true;
+            }catch{
+                connect.Close();
+                return false;
+            }
+
+        }
+
+        public bool changePassword(string username, string password){
+            try{
+                connection();
+                string SQlQuery = "UPDATE login SET Password = " + password + " WHERE Username = " + username + ";";
+                MySqlCommand myCommand = new MySqlCommand(SQlQuery, connect);
+                int j = myCommand.ExecuteNonQuery();
+                Console.WriteLine(j);
+                connect.Close();
+                return true;
+            }catch{
+                connect.Close();
+                return false;
+            }
+        }
+
         public bool Delete(string id)
         {
             try

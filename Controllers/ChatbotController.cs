@@ -123,5 +123,27 @@ namespace SeniorProj.Controllers
         public void decrementCall(string answerID, string question){
             helperCall(answerID, question, false);
         }
+
+
+
+        public bool changeUsername(string username, string password, string certificate){
+            if(!certificate.Equals(this.certificate))
+            {
+                return false;
+            }
+            Database db = new Database();
+            db.changeUsername(username, password);
+            return true;
+        }
+
+        public bool changePassword(string username, string password, string certificate){
+            if(!certificate.Equals(this.certificate))
+            {
+                return false;
+            }
+            Database db = new Database();
+            db.changePassword(username, password);
+            return true;
+        }
     }
 }
