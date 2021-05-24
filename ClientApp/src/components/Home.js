@@ -168,10 +168,14 @@ export class Home extends Component {
                       <button id="ask-button" class="btn btn-primary" type="submit" onClick={this.askButton.bind(this)}>Ask</button>
                   </div>
                   <div id="instructions" class="col-3">
-                      <div class="row">Welcome to the IRPA frequently asked questions chat bot. If you have any questions about IRPA or its responseabilties please ask the chat bot.</div>
+                      <div class="row">Welcome to the IRPA frequently asked questions chat bot. If you have any questions about IRPA or its responsibilities please ask the chat bot.</div>
+                      <br/>
                       <div class="row">This relies on your input to return accurate answers, but occasionly will make a mistake.</div>
+                      <br />
                       <div class="row">If the chat bot returns with a wrong answer, please reply to the chat bot with the word wrong or no.</div>
+                      <br />
                       <div class="row">If the chat bot comes back with multiple answers, please reply with the number of the correct response (eg. 2).</div>
+                      <br />
                       <div class="row">If the chat bot cannot answer your question email the IRPA office.</div>
                       <div class="row">We appreciate the feedback you provide.</div>
                   </div>
