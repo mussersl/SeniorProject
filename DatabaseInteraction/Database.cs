@@ -15,7 +15,7 @@ namespace Chatbot
         }
         
         public void connection(){
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "\\IP.txt");
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "IP.txt");
             string text = System.IO.File.ReadAllText(@path);
             string myConnectString = "server=" + text + "; port=3300;Database=body;uid=root;pwd=test;";
             connect.ConnectionString = myConnectString;

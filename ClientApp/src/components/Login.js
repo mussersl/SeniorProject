@@ -28,6 +28,7 @@ export class Login extends Component {
         const response = await result.text();
         sessionStorage.setItem("verificationIRPAChatbot", response);
         this.fetchVerification();
+        document.getElementById("error").innerHTML = "Incorrect username or password.";
         return;
     }
 
@@ -66,6 +67,7 @@ export class Login extends Component {
                             </div>
                         </div>
                         <button id="login-button" class="btn btn-primary" type="submit" onClick={this.verifyLogin.bind(this)}>Login</button>
+                        <div id="error"></div>
                     </div>
                 </div>
 
