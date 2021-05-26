@@ -1,0 +1,1 @@
+server=192.168.1.101; port=3300;Database=body;uid=root;pwd=test;
